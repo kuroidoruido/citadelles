@@ -1,0 +1,174 @@
+package carte.jeu;
+
+import java.util.ArrayList;
+
+import carte.Famille;
+import carte.Merveille;
+import carte.Quartier;
+import carte.personnage.Personnage;
+
+/**
+ * @author Bauchet Clément
+ * @author Pena Anthony
+ * @version 24 oct. 2012
+ *
+ */
+public class Joueur {
+	
+	private String nom;
+	private ArrayList<Quartier> main;
+	private Personnage perso;
+	private int or;
+	private ArrayList<Quartier> quartierConstruit;
+	private int droitConstruction;
+	
+	private Partie partie;
+	
+	/**
+	 * @param nom le nom du joueur
+	 */
+	public Joueur(String nom, Partie partie) {
+		super();
+		this.nom = nom;
+		this.main = new ArrayList<Quartier>();
+		this.perso = null;
+		this.or = 2;
+		this.quartierConstruit = new ArrayList<Quartier>();
+		this.droitConstruction = 1;
+		this.partie = partie;
+	}
+	
+	/**
+	 * @return le nom du joueur
+	 */
+	public String getNom() {
+		return nom;
+	}
+	
+	/**
+	 * @return la liste des quartiers que le joueur a en main
+	 */
+	public ArrayList<Quartier> getMain() {
+		return main;
+	}
+	
+	public void addCarteMain(Quartier q) {
+		main.add(q);
+	}
+	
+	/**
+	 * @return le personnage attribué au joueur
+	 */
+	public Personnage getPerso() {
+		return perso;
+	}
+	
+	/**
+	 * @param p le personnage à attribué au joueur
+	 */
+	public void setPerso(Personnage p) {
+		perso = p;
+	}
+	
+	/**
+	 * @return le nombre de pièce d'or disponible
+	 */
+	public int getOr() {
+		return or;
+	}
+	
+	public void addOr(int nbPieces) {
+		or += nbPieces;
+	}
+	
+	public void subOr(int nbPieces) throws PasAssezDOrException {
+		if(nbPieces <= or)
+		{
+			or -= nbPieces;
+		}
+		else
+		{
+			throw new PasAssezDOrException();
+		}
+	}
+	
+	public void construireQuartier(Quartier q) throws QuartierPasDansLaMainException, QuartierDejaConstruiteException {
+		if(main.contains(q))
+		{
+			if(quartierConstruit.contains(q))
+			{
+				throw new QuartierDejaConstruiteException();
+			}
+			Joueur bailli = partie.isThereBailli();
+			if(bailli != null)
+			{
+				try {
+					subOr(q.getPrix()+1);
+					bailli.addOr(1);
+				} catch (PasAssezDOrException e) {
+					// TODO Bloc catch généré automatiquement
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				try {
+					subOr(q.getPrix());
+				} catch (PasAssezDOrException e) {
+					// TODO Bloc catch généré automatiquement
+					e.printStackTrace();
+				}
+			}
+			quartierConstruit.add(main.remove(main.indexOf(q)));
+		}
+		else
+		{
+			throw new QuartierPasDansLaMainException();
+		}
+	}
+	
+	/**
+	 * @return la liste des quartiers construits
+	 */
+	public ArrayList<Quartier> getQuartierConstruit() {
+		return quartierConstruit;
+	}
+	
+	/**
+	 * @return le nombre de quartier que le joueur est autorisé à construire au prochain tour
+	 */
+	public int getDroitConstruction() {
+		return droitConstruction;
+	}
+	
+	public void addDroitConstruction(int supDroit) {
+		droitConstruction += supDroit;
+	}
+	
+	public boolean huitQuartier() {
+		return (quartierConstruit.size() >= 8);
+	}
+	
+	public int calculerPoints() {
+		int points = 0;
+		ArrayList<Famille> listeFamilleQuartier = new ArrayList<Famille>();
+		for(Quartier q : quartierConstruit)
+		{
+			if(!listeFamilleQuartier.contains(q.getFamille()))
+			{
+				listeFamilleQuartier.add(q.getFamille());
+			}
+			points += q.calculPoints();
+		}
+		if(listeFamilleQuartier.size() == Famille.getNbFamille())
+		{
+			points += 3;
+		}
+		if(huitQuartier())
+		{
+			points += 2;
+		}
+		return points;
+	}
+	
+}
