@@ -1,4 +1,4 @@
-package carte.jeu;
+package jeu;
 
 /**
  * @author Bauchet Clément

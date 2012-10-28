@@ -1,4 +1,4 @@
-package carte.jeu;
+package jeu;
 
 import java.util.ArrayList;
 import java.util.Iterator;
