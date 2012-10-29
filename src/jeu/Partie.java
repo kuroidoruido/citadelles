@@ -28,16 +28,27 @@ public class Partie {
 	private ArrayList<Personnage> pilePerso;
 	
 	/** Constructeur de Partie, initialise la partie en instanciant les listes et en distribuant les cartes.
+	 * @throws NombreDeJoueurIncorrectException 
 	 * 
 	 */
-	public Partie() {
+	public Partie(LinkedList<String> listeJoueur) throws NombreDeJoueurIncorrectException {
 		super();
-		this.nombreDeTour = 0;
-		this.listeJoueur = new LinkedList<Joueur>();
-		this.joueurCourant = null;
-		this.pileQuartier = new LinkedList<Quartier>();
-		this.pilePerso = new ArrayList<Personnage>();
-		initialiser();
+		if(3 <= listeJoueur.size() && listeJoueur.size() <= 8)
+		{
+			this.nombreDeTour = 0;
+			for(String j : listeJoueur)
+			{
+				this.listeJoueur.add(new Joueur(j,this));
+			}
+			this.joueurCourant = null;
+			this.pileQuartier = new LinkedList<Quartier>();
+			this.pilePerso = new ArrayList<Personnage>();
+			initialiser();
+		}
+		else
+		{
+			throw new NombreDeJoueurIncorrectException("Erreur sur le nombre de joueur ! Le nombre de joueur doit être compris entre 3 et 8.");
+		}
 	}
 
 	/**
@@ -122,6 +133,9 @@ public class Partie {
 		return retour;
 	}
 	
+	/** Méthode permettant d'initialiser une partie
+	 * 
+	 */
 	private void initialiser() {
 		Famille religion = new Famille("Religion", Color.blue);
 		Famille noblesse = new Famille("Noblesse", Color.yellow);
@@ -214,6 +228,14 @@ public class Partie {
 		pilePerso.add(new Reine(noblesse,this));
 
 		//Collections.shuffle((List<Personnage>)(pilePerso));
+		
+		for(Joueur j : listeJoueur)
+		{
+			j.addCarteMain(pileQuartier.removeFirst());
+			j.addCarteMain(pileQuartier.removeFirst());
+			j.addCarteMain(pileQuartier.removeFirst());
+			j.addCarteMain(pileQuartier.removeFirst());
+		}
 	}
 	
 	/** Méthode qui donne le nombre indiqué de pièces d'or au joueur courant
