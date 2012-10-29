@@ -8,7 +8,7 @@ import carte.Quartier;
 import carte.personnage.Personnage;
 
 /**
- * @author Bauchet Cl√©ment
+ * @author Bauchet ClÈment
  * @author Pena Anthony
  * @version 24 oct. 2012
  *
@@ -57,21 +57,21 @@ public class Joueur {
 	}
 	
 	/**
-	 * @return le personnage attribu√© au joueur
+	 * @return le personnage attribuÈ au joueur
 	 */
 	public Personnage getPerso() {
 		return perso;
 	}
 	
 	/**
-	 * @param p le personnage √† attribu√© au joueur
+	 * @param p le personnage ‡ attribuer au joueur
 	 */
 	public void setPerso(Personnage p) {
 		perso = p;
 	}
 	
 	/**
-	 * @return le nombre de pi√®ce d'or disponible
+	 * @return le nombre de piËce d'or disponible
 	 */
 	public int getOr() {
 		return or;
@@ -106,7 +106,7 @@ public class Joueur {
 					subOr(q.getPrix()+1);
 					bailli.addOr(1);
 				} catch (PasAssezDOrException e) {
-					// TODO Bloc catch g√©n√©r√© automatiquement
+					// TODO Bloc catch gÈnÈrÈ automatiquement
 					e.printStackTrace();
 				}
 			}
@@ -115,7 +115,7 @@ public class Joueur {
 				try {
 					subOr(q.getPrix());
 				} catch (PasAssezDOrException e) {
-					// TODO Bloc catch g√©n√©r√© automatiquement
+					// TODO Bloc catch gÈnÈrÈ automatiquement
 					e.printStackTrace();
 				}
 			}
@@ -135,7 +135,7 @@ public class Joueur {
 	}
 	
 	/**
-	 * @return le nombre de quartier que le joueur est autoris√© √† construire au prochain tour
+	 * @return le nombre de quartier que le joueur est autorisÈ ‡ construire au prochain tour
 	 */
 	public int getDroitConstruction() {
 		return droitConstruction;
