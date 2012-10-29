@@ -9,7 +9,7 @@ import carte.Quartier;
 import carte.personnage.Personnage;
 
 /**
- * @author Bauchet Clément
+ * @author Bauchet Clï¿½ment
  * @author Pena Anthony
  * @version 24 oct. 2012
  *
@@ -19,7 +19,6 @@ public class Partie {
 	private int nombreDeTour;
 	private LinkedList<Joueur> listeJoueur;
 	private Joueur joueurCourant;
-	private Iterator<Joueur> iteJoueur;
 	private LinkedList<Quartier> pileQuartier;
 	private ArrayList<Personnage> pilePerso;
 	
@@ -41,7 +40,7 @@ public class Partie {
 	}
 
 	/**
-	 * @return le nombre de tour écoulé
+	 * @return le nombre de tour ï¿½coulï¿½
 	 */
 	public int getNombreDeTour() {
 		return nombreDeTour;
@@ -84,7 +83,7 @@ public class Partie {
 	}
 	
 	/**
-	 * @param p le personnage à attribuer au joueur courant
+	 * @param p le personnage ï¿½ attribuer au joueur courant
 	 */
 	public void choisirPerso(Personnage p) {
 		joueurCourant.setPerso(p);
@@ -117,16 +116,33 @@ public class Partie {
 		joueurCourant.addOr(nbPieces);
 	}
 	
+	/** MÃ©thode permettant de passer au joueur suivant, et d'indiquer quand le tour se termine.
+	 * 
+	 * @return false dÃ¨s qu'on passe au tour suivant.
+	 */
 	public boolean joueurSuivant() {
-		if(iteJoueur == null)
+		boolean suivant = true;
+		Iterator<Joueur> iteJoueur = listeJoueur.iterator();
+		
+		int next = joueurCourant.getPerso().getOrdre()+1;
+		if(next < 1 || 9 < next)
 		{
-			iteJoueur = listeJoueur.iterator();
+			suivant = false;
 		}
 		
-		if(iteJoueur.hasNext())
+		if(suivant)
 		{
-			joueurCourant = iteJoueur.next();
+			Joueur j;
+			while(iteJoueur.hasNext() && next != 0)
+			{
+				j = iteJoueur.next();
+				if(j.getPerso().getOrdre() == next)
+				{
+					joueurCourant = j;
+					next = 0;
+				}
+			}
 		}
-	return false;
+	return suivant;
 	}
 }
