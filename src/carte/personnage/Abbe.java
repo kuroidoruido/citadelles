@@ -5,6 +5,12 @@ import jeu.Partie;
 import jeu.PasAssezDOrException;
 import carte.Famille;
 
+/**
+ * @author Bauchet ClÃ©ment
+ * @author Pena Anthony
+ * @version 29 oct. 2012
+ *
+ */
 public class Abbe extends Personnage {
 
 	public Abbe(String nom, Famille famille, String texteCapacite, int ordre, Partie partie) {
@@ -21,7 +27,7 @@ public class Abbe extends Personnage {
 		try {
 			tmp.subOr(1);	//Le joueur le plus riche perd 1 or
 		} catch (PasAssezDOrException e) {}
-		partie.getJoueurCourant().addOr(1); //L'abbé gagne 1 or
+		partie.getJoueurCourant().addOr(1); //L'abbï¿½ gagne 1 or
 	}
 	
 	public void capacite(int j) {}

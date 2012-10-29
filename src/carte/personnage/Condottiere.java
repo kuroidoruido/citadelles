@@ -3,6 +3,12 @@ package carte.personnage;
 import jeu.Partie;
 import carte.Famille;
 
+/**
+ * @author Bauchet Clément
+ * @author Pena Anthony
+ * @version 29 oct. 2012
+ *
+ */
 public class Condottiere extends Personnage {
 
 	public Condottiere(String nom, Famille famille, String texteCapacite,int ordre, Partie partie) {

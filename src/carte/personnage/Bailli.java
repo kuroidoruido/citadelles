@@ -3,6 +3,12 @@ package carte.personnage;
 import jeu.Partie;
 import carte.Famille;
 
+/**
+ * @author Bauchet ClÃ©ment
+ * @author Pena Anthony
+ * @version 29 oct. 2012
+ *
+ */
 public class Bailli extends Personnage {
 
 	public Bailli(String nom, Famille famille, String texteCapacite, int ordre, Partie partie) {
@@ -11,6 +17,6 @@ public class Bailli extends Personnage {
 
 	public void capacite() {}
 
-	public void capacite(int j) {} //La capacité du Bailli est codée dans la méthode construreQuartier() de Joueur
+	public void capacite(int j) {} //La capacitï¿½ du Bailli est codï¿½e dans la mï¿½thode construreQuartier() de Joueur
 
 }
