@@ -1,7 +1,7 @@
 package carte;
 
 /**
- * @author Bauchet ClÃ©ment
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 24 oct. 2012
  *

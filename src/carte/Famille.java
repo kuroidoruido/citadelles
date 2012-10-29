@@ -3,7 +3,7 @@ package carte;
 import java.awt.Color;
 
 /**
- * @author Bauchet ClÃ©ment
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 24 oct. 2012
  *
@@ -16,7 +16,7 @@ public class Famille {
 	
 	/**
 	 * @param nom le nom de la famille
-	 * @param couleur la couleur attribuÃ©e Ã  la famille
+	 * @param couleur la couleur attribuée à la famille
 	 */
 	public Famille(String nom, Color couleur) {
 		this.nom = nom;
@@ -39,7 +39,7 @@ public class Famille {
 	}
 
 	/**
-	 * @return la couleur attribuÃ©e Ã  la famille
+	 * @return la couleur attribuée à la famille
 	 */
 	public Color getCouleur() {
 		return couleur;
