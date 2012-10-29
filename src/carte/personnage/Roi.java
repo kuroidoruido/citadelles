@@ -15,11 +15,8 @@ public class Roi extends Personnage {
 		super("Roi", f, "Devient le premier joueur au tour suivant", 4, partie);
 	}
 	
-	public void capacite() {}
-	
-	public void capacite(int j) {
-	
+	public void capacite() {
+		
 	}
-
 
 }

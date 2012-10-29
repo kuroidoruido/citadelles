@@ -16,10 +16,5 @@ public class Condottiere extends Personnage {
 	}
 	
 	public void capacite() {}
-	
-	public void capacite(int j) {
-	
-	}
-
 
 }

@@ -16,14 +16,6 @@ public class Reine extends Personnage {
 	}
 	
 	public void capacite() {
-	// TODO Auto-generated method stub
-	
+		// Si évolution
 	}
-	
-	public void capacite(int j) {
-	// TODO Auto-generated method stub
-	
-	}
-
-
 }

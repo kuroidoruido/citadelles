@@ -30,6 +30,4 @@ public class Abbe extends Personnage {
 		partie.getJoueurCourant().addOr(1); //L'abb� gagne 1 or
 	}
 	
-	public void capacite(int j) {}
-	
 }

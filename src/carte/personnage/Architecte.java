@@ -19,7 +19,9 @@ public class Architecte extends Personnage {
 		partie.getJoueurCourant().addDroitConstruction(2); //L'architecte a le droit de construire 2 bâtiments de plus
 	}
 	
-	public void capacite(int j) {}
+	public void capacite(int j) {
+		// Si évolution
+	}
 
 
 }

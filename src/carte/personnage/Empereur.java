@@ -15,12 +15,8 @@ public class Empereur extends Personnage {
 		super("Empereur", f, "Désigne le premier joueur du tour suivant", 4, partie);
 	}
 	
-	public void capacite() {}
-	
-	public void capacite(int j) {
-	
-	
+	public void capacite() {
+		
 	}
-
 
 }

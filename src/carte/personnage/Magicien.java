@@ -16,13 +16,7 @@ public class Magicien extends Personnage {
 	}
 	
 	public void capacite() {
-	
+		// Si évolution
 	}
-	
-	public void capacite(int j) {
-	// TODO Auto-generated method stub
-	
-	}
-
 
 }
