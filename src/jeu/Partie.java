@@ -9,7 +9,7 @@ import carte.Quartier;
 import carte.personnage.Personnage;
 
 /**
- * @author Bauchet ClÃ©ment
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 24 oct. 2012
  *
@@ -41,7 +41,7 @@ public class Partie {
 	}
 
 	/**
-	 * @return le nombre de tour Ã©coulÃ©
+	 * @return le nombre de tour écoulé
 	 */
 	public int getNombreDeTour() {
 		return nombreDeTour;
@@ -84,7 +84,7 @@ public class Partie {
 	}
 	
 	/**
-	 * @param p le personnage Ã  attribuer au joueur courant
+	 * @param p le personnage à attribuer au joueur courant
 	 */
 	public void choisirPerso(Personnage p) {
 		joueurCourant.setPerso(p);
