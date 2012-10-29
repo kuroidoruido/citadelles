@@ -3,12 +3,11 @@ package jeu;
 import java.util.ArrayList;
 
 import carte.Famille;
-import carte.Merveille;
 import carte.Quartier;
 import carte.personnage.Personnage;
 
 /**
- * @author Bauchet Clément
+ * @author Bauchet Clï¿½ment
  * @author Pena Anthony
  * @version 24 oct. 2012
  *
@@ -57,21 +56,21 @@ public class Joueur {
 	}
 	
 	/**
-	 * @return le personnage attribué au joueur
+	 * @return le personnage attribuï¿½ au joueur
 	 */
 	public Personnage getPerso() {
 		return perso;
 	}
 	
 	/**
-	 * @param p le personnage à attribuer au joueur
+	 * @param p le personnage ï¿½ attribuer au joueur
 	 */
 	public void setPerso(Personnage p) {
 		perso = p;
 	}
 	
 	/**
-	 * @return le nombre de pièce d'or disponible
+	 * @return le nombre de piï¿½ce d'or disponible
 	 */
 	public int getOr() {
 		return or;
@@ -106,7 +105,6 @@ public class Joueur {
 					subOr(q.getPrix()+1);
 					bailli.addOr(1);
 				} catch (PasAssezDOrException e) {
-					// TODO Bloc catch généré automatiquement
 					e.printStackTrace();
 				}
 			}
@@ -115,7 +113,6 @@ public class Joueur {
 				try {
 					subOr(q.getPrix());
 				} catch (PasAssezDOrException e) {
-					// TODO Bloc catch généré automatiquement
 					e.printStackTrace();
 				}
 			}
@@ -135,7 +132,7 @@ public class Joueur {
 	}
 	
 	/**
-	 * @return le nombre de quartier que le joueur est autorisé à construire au prochain tour
+	 * @return le nombre de quartier que le joueur est autorisï¿½ ï¿½ construire au prochain tour
 	 */
 	public int getDroitConstruction() {
 		return droitConstruction;
