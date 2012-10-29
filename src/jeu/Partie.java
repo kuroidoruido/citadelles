@@ -72,6 +72,16 @@ public class Partie {
 		return listeJoueur;
 	}
 	
+	public Joueur chercher(Personnage p) {
+		Joueur tmp = null;
+		for(Joueur j : listeJoueur) {
+			if (j.getPerso() == p) {
+				tmp = j;
+			}
+		}
+		return tmp;
+	}
+	
 	
 	/**
 	 * @return le joueur qui détient la couronne
