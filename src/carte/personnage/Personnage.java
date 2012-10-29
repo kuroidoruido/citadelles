@@ -5,11 +5,11 @@ import carte.Famille;
 import jeu.Partie;
 
 /**
- * @author Bauchet Clément
- * @author Pena Anthony
- * @version 24 oct. 2012
- *
- */
+* @author Bauchet ClÃ©ment
+* @author Pena Anthony
+* @version 24 oct. 2012
+*
+*/
 public abstract class Personnage extends Carte {
 
 	protected String texteCapacite;
@@ -17,11 +17,11 @@ public abstract class Personnage extends Carte {
 	protected Partie partie;
 	
 	/**
-	 * @param nom le nom du personnage
-	 * @param famille la famille du personnage
-	 * @param texteCapacite le texte décrivant la capacité du personnage
-	 * @param ordre le numéro d'ordre du personnage
-	 */
+	* @param nom le nom du personnage
+	* @param famille la famille du personnage
+	* @param texteCapacite le texte dÃ©crivant la capacitÃ© du personnage
+	* @param ordre le numÃ©ro d'ordre du personnage
+	*/
 	public Personnage(String nom, Famille famille, String texteCapacite, int ordre, Partie p) {
 		super(nom, famille);
 		this.texteCapacite = texteCapacite;
@@ -30,15 +30,15 @@ public abstract class Personnage extends Carte {
 	}
 	
 	/**
-	 * @return le texte décrivant la capacité du personnage
-	 */
+	* @return le texte dÃ©crivant la capacitÃ© du personnage
+	*/
 	public String getTexteCapacite() {
 		return texteCapacite;
 	}
 	
 	/**
-	 * @return le numéro d'ordre du personnage
-	 */
+	* @return le numÃ©ro d'ordre du personnage
+	*/
 	public int getOrdre() {
 		return ordre;
 	}
@@ -46,4 +46,5 @@ public abstract class Personnage extends Carte {
 	public abstract void capacite();
 	
 	public abstract void capacite(int j);
+
 }
