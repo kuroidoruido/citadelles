@@ -23,6 +23,7 @@ public class Partie {
 	private int nombreDeTour;
 	private LinkedList<Joueur> listeJoueur;
 	private Joueur joueurCourant;
+	private Joueur couronne;
 	private LinkedList<Quartier> pileQuartier;
 	private ArrayList<Personnage> pilePerso;
 	
@@ -60,6 +61,21 @@ public class Partie {
 		return listeJoueur;
 	}
 	
+	
+	/**
+	 * @return le joueur qui détient la couronne
+	 */
+	public Joueur getCouronne() {
+		return couronne;
+	}
+
+	/**
+	 * @param couronne le joueur qui obtient la couronne
+	 */
+	public void setCouronne(Joueur couronne) {
+		this.couronne = couronne;
+	}
+
 	/**
 	 * 
 	 * @return true si un bailli est présent en jeu
@@ -208,7 +224,7 @@ public class Partie {
 		joueurCourant.addOr(nbPieces);
 	}
 	
-	/** Méthode permettant de passer au joueur suivant, et d'indiquer quand le tour se termine.
+	/** Méthode permettant de passer au joueur suivant selon l'ordre des personnages, et d'indiquer quand le tour se termine.  Ce parcours ne peut pas être utilisé en parralèle de suivantTable().
 	 * 
 	 * @return false dès qu'on passe au tour suivant.
 	 */
@@ -236,5 +252,36 @@ public class Partie {
 			}
 		}
 	return suivant;
+	}
+	
+	/** Permet de parcourir les joueurs par rapport à leur ordre autour de la table. Ce parcours ne peut pas être utilisé en parralèle de joueurSuivant()
+	 * 
+	 * @return false si on a fait le tour de tout les joueurs.
+	 */
+	public boolean suivantTable() {
+		boolean suivant = true;
+		if(joueurCourant == null && couronne == null)
+		{
+			joueurCourant = listeJoueur.getFirst();
+		}
+		else if(joueurCourant == null && couronne != null)
+		{
+			joueurCourant = couronne;
+		}
+		else
+		{
+			Iterator<Joueur> iteJoueur = listeJoueur.iterator();
+			while(iteJoueur.hasNext() && iteJoueur.next() != joueurCourant)
+			{}
+			if(iteJoueur.hasNext())
+			{
+				joueurCourant = iteJoueur.next();
+			}
+			else
+			{
+				suivant = false;
+			}
+		}
+		return suivant;
 	}
 }
