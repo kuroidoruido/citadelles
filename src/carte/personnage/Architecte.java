@@ -4,25 +4,21 @@ import jeu.Partie;
 import carte.Famille;
 
 /**
- * @author Bauchet ClÃ©ment
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 29 oct. 2012
  *
  */
 public class Architecte extends Personnage {
 
-	public Architecte(String nom, Famille famille, String texteCapacite,int ordre, Partie partie) {
-		super(nom, famille, texteCapacite, ordre, partie);
+	public Architecte(Famille f, Partie partie) {
+		super("Architecte", f, "Peut bâtir jusqu'à 3 quartiers", 7, partie);
 	}
 
 	public void capacite() {
-		// TODO Auto-generated method stub
-
+		partie.getJoueurCourant().addDroitConstruction(2); //L'architecte a le droit de construire 2 bâtiments de plus
 	}
 
-	public void capacite(int j) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void capacite(int j) {}
 
 }

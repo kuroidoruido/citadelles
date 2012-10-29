@@ -4,15 +4,15 @@ import jeu.Partie;
 import carte.Famille;
 
 /**
- * @author Bauchet ClÃ©ment
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 29 oct. 2012
  *
  */
 public class Magicien extends Personnage {
 
-	public Magicien(String nom, Famille famille, String texteCapacite, int ordre, Partie partie) {
-		super(nom, famille, texteCapacite, ordre, partie);
+	public Magicien(Famille f, Partie partie) {
+		super("Magicien", f, "Peut échanger toute sa main contre la main d'un autre joueur", 3, partie);
 	}
 	
 	public void capacite() {

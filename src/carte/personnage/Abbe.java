@@ -13,8 +13,8 @@ import carte.Famille;
  */
 public class Abbe extends Personnage {
 
-	public Abbe(String nom, Famille famille, String texteCapacite, int ordre, Partie partie) {
-		super(nom, famille, texteCapacite, ordre, partie);
+	public Abbe(Famille f, Partie partie) {
+		super("Abbé", f, "Le joueur le plus riche lui donne 1 pièce d'or", 5, partie);
 	}
 	
 	public void capacite() {
@@ -27,7 +27,7 @@ public class Abbe extends Personnage {
 		try {
 			tmp.subOr(1);	//Le joueur le plus riche perd 1 or
 		} catch (PasAssezDOrException e) {}
-		partie.getJoueurCourant().addOr(1); //L'abbï¿½ gagne 1 or
+		partie.getJoueurCourant().addOr(1); //L'abbé gagne 1 or
 	}
 	
 	public void capacite(int j) {}

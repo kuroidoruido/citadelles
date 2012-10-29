@@ -11,8 +11,8 @@ import carte.Famille;
  */
 public class Marchand extends Personnage {
 
-	public Marchand(String nom, Famille famille, String texteCapacite, int ordre, Partie partie) {
-		super(nom, famille, texteCapacite, ordre, partie);
+	public Marchand(Famille f, Partie partie) {
+		super("Marchand", f, "Gagne une pièce d'or de plus", 6, partie);
 	}
 
 	public void capacite() {

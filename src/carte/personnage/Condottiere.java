@@ -11,8 +11,8 @@ import carte.Famille;
  */
 public class Condottiere extends Personnage {
 
-	public Condottiere(String nom, Famille famille, String texteCapacite,int ordre, Partie partie) {
-		super(nom, famille, texteCapacite, ordre, partie);
+	public Condottiere(Famille f, Partie partie) {
+		super("Condottiere", f, "Peut détruire un quartier en dépensant le coût moins 1 pièce d'or", 8, partie);
 	}
 
 	public void capacite() {}

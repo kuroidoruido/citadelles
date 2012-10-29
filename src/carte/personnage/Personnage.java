@@ -11,7 +11,7 @@ import jeu.Partie;
  *
  */
 public abstract class Personnage extends Carte {
-
+	
 	protected String texteCapacite;
 	protected int ordre;
 	protected Partie partie;

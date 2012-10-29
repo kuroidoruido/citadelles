@@ -4,19 +4,19 @@ import jeu.Partie;
 import carte.Famille;
 
 /**
- * @author Bauchet ClÃ©ment
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 29 oct. 2012
  *
  */
 public class Bailli extends Personnage {
 
-	public Bailli(String nom, Famille famille, String texteCapacite, int ordre, Partie partie) {
-		super(nom, famille, texteCapacite, ordre, partie);
+	public Bailli(Famille f, Partie partie) {
+		super("Bailli",f,"Tout joueur qui construit doit payer 1 pièce d'or au Bailli", 2, partie);
 	}
 
 	public void capacite() {}
 
-	public void capacite(int j) {} //La capacitï¿½ du Bailli est codï¿½e dans la mï¿½thode construreQuartier() de Joueur
+	public void capacite(int j) {} //La capacité du Bailli est codée dans la méthode construreQuartier() de Joueur
 
 }

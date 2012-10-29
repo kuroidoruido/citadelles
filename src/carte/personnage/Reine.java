@@ -11,9 +11,8 @@ import carte.Famille;
  */
 public class Reine extends Personnage {
 
-	public Reine(String nom, Famille famille, String texteCapacite, int ordre, Partie partie) {
-		super(nom, famille, texteCapacite, ordre, partie);
-		// TODO Auto-generated constructor stub
+	public Reine(Famille f, Partie partie) {
+		super("Reine", f, "Gagne 3 pièces d'or si assise à côté du Roi", 9, partie);
 	}
 
 	public void capacite() {

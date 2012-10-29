@@ -11,8 +11,8 @@ import carte.Famille;
  */
 public class Roi extends Personnage {
 
-	public Roi(String nom, Famille famille, String texteCapacite, int ordre, Partie partie) {
-		super(nom, famille, texteCapacite, ordre, partie);
+	public Roi(Famille f, Partie partie) {
+		super("Roi", f, "Devient le premier joueur au tour suivant", 4, partie);
 	}
 
 	public void capacite() {}
