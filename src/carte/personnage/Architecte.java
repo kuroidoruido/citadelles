@@ -21,4 +21,5 @@ public class Architecte extends Personnage {
 
 	public void capacite(int j) {}
 
+	
 }

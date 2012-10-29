@@ -206,6 +206,7 @@ public class Partie {
 		
 		Collections.shuffle((List<Personnage>)(pilePerso));
 		
+		
 	}
 	
 	public void donnerOr(int nbPieces) {

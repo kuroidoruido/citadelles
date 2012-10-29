@@ -32,4 +32,5 @@ public class Abbe extends Personnage {
 	
 	public void capacite(int j) {}
 	
+	
 }

@@ -22,4 +22,5 @@ public class Empereur extends Personnage {
 		
 	}
 
+	
 }

@@ -25,4 +25,5 @@ public class Assassin extends Personnage {
 		
 	}
 
+	
 }

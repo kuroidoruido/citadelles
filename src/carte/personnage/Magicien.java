@@ -24,4 +24,5 @@ public class Magicien extends Personnage {
 		
 	}
 
+	
 }

@@ -46,4 +46,5 @@ public abstract class Personnage extends Carte {
 	public abstract void capacite();
 	
 	public abstract void capacite(int j);
+	
 }

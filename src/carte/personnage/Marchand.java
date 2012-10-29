@@ -21,4 +21,5 @@ public class Marchand extends Personnage {
 
 	public void capacite(int j) {}
 
+	
 }

@@ -19,4 +19,5 @@ public class Bailli extends Personnage {
 
 	public void capacite(int j) {} //La capacité du Bailli est codée dans la méthode construreQuartier() de Joueur
 
+	
 }

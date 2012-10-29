@@ -21,4 +21,5 @@ public class Condottiere extends Personnage {
 		
 	}
 
+	
 }
