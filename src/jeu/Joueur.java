@@ -1,6 +1,7 @@
 package jeu;
 
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import carte.Famille;
 import carte.Quartier;
@@ -15,7 +16,7 @@ import carte.personnage.Personnage;
 public class Joueur {
 	
 	private String nom;
-	private ArrayList<Quartier> main;
+	private TreeSet<Quartier> main;
 	private Personnage perso;
 	private int or;
 	private ArrayList<Quartier> quartierConstruit;
@@ -29,7 +30,7 @@ public class Joueur {
 	public Joueur(String nom, Partie partie) {
 		super();
 		this.nom = nom;
-		this.main = new ArrayList<Quartier>();
+		this.main = new TreeSet<Quartier>();
 		this.perso = null;
 		this.or = 2;
 		this.quartierConstruit = new ArrayList<Quartier>();
@@ -47,7 +48,7 @@ public class Joueur {
 	/**
 	 * @return la liste des quartiers que le joueur a en main
 	 */
-	public ArrayList<Quartier> getMain() {
+	public TreeSet<Quartier> getMain() {
 		return main;
 	}
 	
@@ -116,7 +117,8 @@ public class Joueur {
 					e.printStackTrace();
 				}
 			}
-			quartierConstruit.add(main.remove(main.indexOf(q)));
+			main.remove(q);
+			quartierConstruit.add(q);
 		}
 		else
 		{
@@ -166,6 +168,20 @@ public class Joueur {
 			points += 2;
 		}
 		return points;
+	}
+	
+	public String toString() {
+		String retour = nom+" :\nOr : "+or+"\nMain : ";
+		for(Quartier q : main)
+		{
+			retour += q.toString()+" ";
+		}
+		retour += "\nQuartier Construit : ";
+		for(Quartier q : quartierConstruit)
+		{
+			retour += q.toString()+" ";
+		}
+		return retour;
 	}
 	
 }

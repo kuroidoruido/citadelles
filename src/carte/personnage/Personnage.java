@@ -10,7 +10,7 @@ import jeu.Partie;
 * @version 24 oct. 2012
 *
 */
-public abstract class Personnage extends Carte {
+public abstract class Personnage extends Carte{
 
 	protected String texteCapacite;
 	protected int ordre;
@@ -44,5 +44,4 @@ public abstract class Personnage extends Carte {
 	}
 	
 	public abstract void capacite() throws Exception;
-
 }

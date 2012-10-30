@@ -8,7 +8,7 @@ import java.awt.Color;
  * @version 24 oct. 2012
  *
  */
-public class Famille {
+public class Famille implements Comparable<Famille> {
 	
 	private static int nbFamille = 0;
 	private String nom;
@@ -48,4 +48,11 @@ public class Famille {
 	public boolean equals(Famille f) {
 		return (this.nom == f.nom && this.couleur == f.couleur);
 	}
+
+
+	public int compareTo(Famille f) {
+		return this.nom.compareTo(f.nom);
+	}
+	
+	
 }
