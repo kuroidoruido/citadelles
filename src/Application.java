@@ -1,4 +1,17 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
+
+import carte.personnage.Abbe;
+import carte.personnage.Architecte;
+import carte.personnage.Assassin;
+import carte.personnage.Bailli;
+import carte.personnage.Condottiere;
+import carte.personnage.Empereur;
+import carte.personnage.Magicien;
+import carte.personnage.Marchand;
+import carte.personnage.Personnage;
+import carte.personnage.Reine;
+import carte.personnage.Roi;
 
 import jeu.Joueur;
 import jeu.NombreDeJoueurIncorrectException;

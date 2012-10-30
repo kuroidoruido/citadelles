@@ -25,6 +25,7 @@ public class Partie implements Iterable<Joueur> {
 	private Joueur couronne;
 	private LinkedList<Quartier> pileQuartier;
 	private ArrayList<Personnage> pilePerso;
+	private ArrayList<Personnage> listePersoJoue;
 	
 	/** Constructeur de Partie, initialise la partie en instanciant les listes et en distribuant les cartes.
 	 * @throws NombreDeJoueurIncorrectException 
@@ -42,6 +43,7 @@ public class Partie implements Iterable<Joueur> {
 			}
 			this.pileQuartier = new LinkedList<Quartier>();
 			this.pilePerso = new ArrayList<Personnage>();
+			this.listePersoJoue = new ArrayList<Personnage>();
 			initialiser();
 		}
 		else
@@ -62,6 +64,10 @@ public class Partie implements Iterable<Joueur> {
 	 */
 	public LinkedList<Joueur> getListeJoueur() {
 		return listeJoueur;
+	}
+	
+	public int getNbJoueur() {
+		return listeJoueur.size();
 	}
 	
 	public Joueur chercher(Personnage p) {
@@ -261,5 +267,59 @@ public class Partie implements Iterable<Joueur> {
 		{
 			listeJoueur.addLast(listeJoueur.removeFirst());
 		}
+	}
+	
+	public void selectPerso(ArrayList<Personnage> perso) {
+		listePersoJoue = perso;
+	}
+	
+	public boolean verifierPersoSelectionne() throws NombreDePersonnageSelectionneIncorrectException, PlusieursPersonnageDuMemeOrdreException, PasDeRoiOuDEmpereurException {
+		boolean retour = true;
+		
+		// On vérifie le nombre de carte.
+		if((getNbJoueur() == 8 && listePersoJoue.size() != 9) || (getNbJoueur() < 7 && listePersoJoue.size() != 8))
+		{
+			throw new NombreDePersonnageSelectionneIncorrectException();
+		}
+		
+		// On vérifie qu'un seul Personnage de chaque ordre soit dans les cartes sélectionnées
+		// Sauf pour l'ordre 9 qui peut être à zéro
+		// ET
+		//On vérifie qu'il y a un Roi ou un Empereur
+		Integer[] ordre = new Integer[9];
+		boolean roi = false;
+		for(int i=0;i<9;i++)
+		{
+			ordre[i]=0;
+		}
+		for(Personnage p : listePersoJoue)
+		{
+			ordre[p.getOrdre()-1]++;
+			
+			if(p.getNom() == "Roi" || p.getNom() == "Empereur")
+			{
+				roi = true;
+			}
+		}
+		int i =0;
+		while(retour && i<9)
+		{
+			if(ordre[i] != 1 || (i==8 && ordre[i] != 0))
+			{
+				retour = false;
+			}
+			i++;
+		}
+		if(!retour)
+		{
+			throw new PlusieursPersonnageDuMemeOrdreException();
+		}
+
+		if(!roi)
+		{
+			throw new PasDeRoiOuDEmpereurException();
+		}
+		
+		return retour;
 	}
 }
