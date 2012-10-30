@@ -81,6 +81,23 @@ public class Joueur {
 		or += nbPieces;
 	}
 	
+	/**
+	 * ajoute l'or correspondant aux quartier construit
+	 */
+	public void addOrQuartier() {
+		Famille famillePerso = perso.getFamille();
+		if(famillePerso != null)
+		{
+			for(Quartier q : quartierConstruit)
+			{
+				if(q.getFamille() == famillePerso)
+				{
+					or += 1;
+				}
+			}
+		}
+	}
+		
 	public void subOr(int nbPieces) throws PasAssezDOrException {
 		if(nbPieces <= or)
 		{
