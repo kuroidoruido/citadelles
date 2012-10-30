@@ -36,9 +36,10 @@ public class Partie {
 		if(3 <= listeJoueur.size() && listeJoueur.size() <= 8)
 		{
 			this.nombreDeTour = 0;
+			this.listeJoueur = new LinkedList<Joueur>();
 			for(String j : listeJoueur)
 			{
-				this.listeJoueur.add(new Joueur(j,this));
+				this.listeJoueur.add((new Joueur(j,this)));
 			}
 			this.joueurCourant = null;
 			this.pileQuartier = new LinkedList<Quartier>();

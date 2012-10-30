@@ -14,20 +14,15 @@ public class Application {
 
 	/**
 	 * @param args
+	 * @throws NombreDeJoueurIncorrectException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NombreDeJoueurIncorrectException {
 		LinkedList<String> listeJoueur = new LinkedList<String>();
 		listeJoueur.add("Joueur 1");
 		listeJoueur.add("Joueur 2");
 		listeJoueur.add("Joueur 3");
 		
-		Partie partie = null;
-		try {
-			partie = new Partie(listeJoueur);
-		} catch (NombreDeJoueurIncorrectException e) {
-			System.out.println(e.getMessage());
-		}
-		
+		Partie partie = new Partie(listeJoueur);
 		
 	}
 
