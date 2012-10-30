@@ -44,4 +44,8 @@ public abstract class Personnage extends Carte{
 	}
 	
 	public abstract void capacite() throws Exception;
+	
+	public boolean memeOrdre(Personnage p) {
+		return (this.ordre == p.ordre);
+	}
 }

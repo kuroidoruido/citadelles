@@ -1,6 +1,5 @@
 package carte.personnage;
 
-import jeu.Joueur;
 import jeu.Partie;
 import carte.Famille;
 

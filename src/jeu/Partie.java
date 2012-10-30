@@ -94,6 +94,13 @@ public class Partie implements Iterable<Joueur> {
 	public void setCouronne(Joueur couronne) {
 		this.couronne = couronne;
 	}
+	
+	/**
+	 * @return le pilePerso
+	 */
+	public ArrayList<Personnage> getPilePerso() {
+		return pilePerso;
+	}
 
 	/**
 	 * 
@@ -242,7 +249,8 @@ public class Partie implements Iterable<Joueur> {
 		}
 		
 		// On choisit aléatoirement le joueur qui portera la couronne au premier tour.
-		setCouronne(listeJoueur.get((int) (Math.random()*listeJoueur.size()+1)));
+		setCouronne(listeJoueur.get((new Double(Math.random()*listeJoueur.size()).intValue())));
+		couronneEnPremier();
 	}
 	
 	/**
@@ -273,13 +281,17 @@ public class Partie implements Iterable<Joueur> {
 		listePersoJoue = perso;
 	}
 	
+	public ArrayList<Personnage> getListePersoJoue() {
+		return listePersoJoue;
+	}
+	
 	public boolean verifierPersoSelectionne() throws NombreDePersonnageSelectionneIncorrectException, PlusieursPersonnageDuMemeOrdreException, PasDeRoiOuDEmpereurException {
 		boolean retour = true;
 		
 		// On vérifie le nombre de carte.
 		if((getNbJoueur() == 8 && listePersoJoue.size() != 9) || (getNbJoueur() < 7 && listePersoJoue.size() != 8))
 		{
-			throw new NombreDePersonnageSelectionneIncorrectException();
+			throw new NombreDePersonnageSelectionneIncorrectException("nombre de joueur = "+getNbJoueur()+" nombre de Personnage sélectionnés = "+listePersoJoue.size());
 		}
 		
 		// On vérifie qu'un seul Personnage de chaque ordre soit dans les cartes sélectionnées
@@ -320,6 +332,21 @@ public class Partie implements Iterable<Joueur> {
 			throw new PasDeRoiOuDEmpereurException();
 		}
 		
+		return retour;
+	}
+	
+	public boolean ordreDejaSelectionne(Personnage perso) {
+		boolean retour = false;
+		if(!listePersoJoue.isEmpty())
+		{
+			for(Personnage p : listePersoJoue)
+			{
+				if(p.memeOrdre(perso))
+				{
+					retour = true;
+				}
+			}
+		}
 		return retour;
 	}
 }

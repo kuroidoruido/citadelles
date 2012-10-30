@@ -1,7 +1,5 @@
 package carte;
 
-import carte.personnage.Personnage;
-
 /**
  * @author Bauchet Clément
  * @author Pena Anthony
