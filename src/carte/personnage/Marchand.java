@@ -16,6 +16,6 @@ public class Marchand extends Personnage {
 	}
 	
 	public void capacite() {
-		partie.getJoueurCourant().addOr(1); //Le marchand gagne 1 or de plus
+		partie.chercher(this).addOr(1); //Le marchand gagne 1 or de plus
 	}
 }

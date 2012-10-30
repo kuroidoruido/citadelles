@@ -43,6 +43,6 @@ public abstract class Personnage extends Carte {
 		return ordre;
 	}
 	
-	public abstract void capacite();
+	public abstract void capacite() throws Exception;
 
 }

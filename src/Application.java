@@ -17,12 +17,17 @@ public class Application {
 	 * @throws NombreDeJoueurIncorrectException 
 	 */
 	public static void main(String[] args) throws NombreDeJoueurIncorrectException {
+		// On liste les joueurs
 		LinkedList<String> listeJoueur = new LinkedList<String>();
 		listeJoueur.add("Joueur 1");
 		listeJoueur.add("Joueur 2");
 		listeJoueur.add("Joueur 3");
 		
+		// On créait une partie
 		Partie partie = new Partie(listeJoueur);
+		
+		// On sélectionne les personnages qui seront joué
+		// On attribut un personnage à chaque joueur
 		
 	}
 

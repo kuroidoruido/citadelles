@@ -18,11 +18,10 @@ import carte.personnage.*;
  * @version 24 oct. 2012
  *
  */
-public class Partie {
+public class Partie implements Iterable<Joueur> {
 	
 	private int nombreDeTour;
 	private LinkedList<Joueur> listeJoueur;
-	private Joueur joueurCourant;
 	private Joueur couronne;
 	private LinkedList<Quartier> pileQuartier;
 	private ArrayList<Personnage> pilePerso;
@@ -41,7 +40,6 @@ public class Partie {
 			{
 				this.listeJoueur.add((new Joueur(j,this)));
 			}
-			this.joueurCourant = null;
 			this.pileQuartier = new LinkedList<Quartier>();
 			this.pilePerso = new ArrayList<Personnage>();
 			initialiser();
@@ -57,13 +55,6 @@ public class Partie {
 	 */
 	public int getNombreDeTour() {
 		return nombreDeTour;
-	}
-	
-	/**
-	 * @return le joueur courant
-	 */
-	public Joueur getJoueurCourant() {
-		return joueurCourant;
 	}
 	
 	/**
@@ -118,18 +109,11 @@ public class Partie {
 	 * @param nbQuartier le nombre de quartier à piocher
 	 * @return les nbQuartier premiers quartiers de la pile de quartier
 	 */
-	public void piocherQuartier(int nbQuartier) {
+	public void piocherQuartier(Joueur j, int nbQuartier) {
 		for(int i=0; i<nbQuartier; i++)
 		{
-			joueurCourant.addCarteMain(pileQuartier.removeFirst());
+			j.addCarteMain(pileQuartier.removeFirst());
 		}
-	}
-	
-	/**
-	 * @param p le personnage à attribuer au joueur courant
-	 */
-	public void choisirPerso(Personnage p) {
-		joueurCourant.setPerso(p);
 	}
 	
 	/**
@@ -148,12 +132,14 @@ public class Partie {
 	 * 
 	 */
 	private void initialiser() {
+		// Création des familles de carte
 		Famille religion = new Famille("Religion", Color.blue);
 		Famille noblesse = new Famille("Noblesse", Color.yellow);
 		Famille commerce = new Famille("Commerce", Color.green);
 		Famille militaire = new Famille("Militaire", Color.red);
 		Famille merveille = new Famille("Merveille", Color.magenta);
-
+		
+		// Création et ajout à la pile de chacune des cartes Quartier et Merveille
 		pileQuartier.clear();
 		pileQuartier.add(new Quartier("Temple",religion,1));
 		pileQuartier.add(new Quartier("Temple",religion,1));
@@ -224,8 +210,10 @@ public class Partie {
 		pileQuartier.add(new Merveille("Université",merveille,6,"Cette réalisation de prestige (nul n'a jamais compris à quoi pouvait bien servir une université) coûte six pièces d'or à bâtir mais vaut huit points dans le décompte de fin de partie.",2));
 		pileQuartier.add(new Merveille("Dracoport",merveille,6,"Cette réalisation de prestige (on n'a pas vu de dragon dans le Royaume depuis bientôt mille ans) coûte six pièces d'or à bâtir mais vaut huit points dans le décompte de fin de partie.",2));
 
+		// Mélange aléatoire de la pile de Quartier
 		Collections.shuffle((List<Quartier>)(pileQuartier));
 
+		// Création et ajout des cartes Personnage à la liste des Personnages
 		pilePerso.clear();
 		pilePerso.add(new Assassin(null,this));
 		pilePerso.add(new Bailli(null,this));
@@ -238,8 +226,7 @@ public class Partie {
 		pilePerso.add(new Condottiere(militaire,this));
 		pilePerso.add(new Reine(noblesse,this));
 
-		//Collections.shuffle((List<Personnage>)(pilePerso));
-		
+		// On distribue à chaque joueur 4 cartes Quartier.
 		for(Joueur j : listeJoueur)
 		{
 			j.addCarteMain(pileQuartier.removeFirst());
@@ -247,74 +234,32 @@ public class Partie {
 			j.addCarteMain(pileQuartier.removeFirst());
 			j.addCarteMain(pileQuartier.removeFirst());
 		}
-	}
-	
-	/** Méthode qui donne le nombre indiqué de pièces d'or au joueur courant
-	 * 
-	 * @param nbPieces le nombre de pièces à donner
-	 */
-	public void donnerOr(int nbPieces) {
-		joueurCourant.addOr(nbPieces);
-	}
-	
-	/** Méthode permettant de passer au joueur suivant selon l'ordre des personnages, et d'indiquer quand le tour se termine.  Ce parcours ne peut pas être utilisé en parralèle de suivantTable().
-	 * 
-	 * @return false dès qu'on passe au tour suivant.
-	 */
-	public boolean joueurSuivant() {
-		boolean suivant = true;
-		Iterator<Joueur> iteJoueur = listeJoueur.iterator();
 		
-		int next = joueurCourant.getPerso().getOrdre()+1;
-		if(next < 1 || 9 < next)
-		{
-			suivant = false;
-		}
-		
-		if(suivant)
-		{
-			Joueur j;
-			while(iteJoueur.hasNext() && next != 0)
-			{
-				j = iteJoueur.next();
-				if(j.getPerso().getOrdre() == next)
-				{
-					joueurCourant = j;
-					next = 0;
-				}
-			}
-		}
-	return suivant;
+		// On choisit aléatoirement le joueur qui portera la couronne au premier tour.
+		setCouronne(listeJoueur.get((int) (Math.random()*listeJoueur.size()+1)));
 	}
 	
-	/** Permet de parcourir les joueurs par rapport à leur ordre autour de la table. Ce parcours ne peut pas être utilisé en parralèle de joueurSuivant()
-	 * 
-	 * @return false si on a fait le tour de tout les joueurs.
+	/**
+	 * @return un Iterator<Joueur> qui permet de parcourir les joueurs selon leur ordre autour de la table, en commençant par le possésseur de la couronne.
 	 */
-	public boolean suivantTable() {
-		boolean suivant = true;
-		if(joueurCourant == null && couronne == null)
+	public Iterator<Joueur> iteratorTable() {
+		return listeJoueur.iterator();
+	}
+
+	/**
+	 * @return un Iterator<Joueur> qui permet de parcourir les joueurs selon l'ordre de leurs Personnage.
+	 */
+	public Iterator<Joueur> iterator() {
+		return new JoueurOrdrePersoIterator(this);
+	}
+	
+	/** positionne le premier joueur au porteur de la couronne
+	 * 
+	 */
+	public void couronneEnPremier() {
+		while(listeJoueur.getFirst() != couronne)
 		{
-			joueurCourant = listeJoueur.getFirst();
+			listeJoueur.addLast(listeJoueur.removeFirst());
 		}
-		else if(joueurCourant == null && couronne != null)
-		{
-			joueurCourant = couronne;
-		}
-		else
-		{
-			Iterator<Joueur> iteJoueur = listeJoueur.iterator();
-			while(iteJoueur.hasNext() && iteJoueur.next() != joueurCourant)
-			{}
-			if(iteJoueur.hasNext())
-			{
-				joueurCourant = iteJoueur.next();
-			}
-			else
-			{
-				suivant = false;
-			}
-		}
-		return suivant;
 	}
 }

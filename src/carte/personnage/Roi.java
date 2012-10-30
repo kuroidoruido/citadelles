@@ -18,6 +18,7 @@ public class Roi extends Personnage {
 	
 	public void capacite() {
 		super.partie.setCouronne(super.partie.chercher(this));
+		partie.couronneEnPremier();
 	}
 
 }

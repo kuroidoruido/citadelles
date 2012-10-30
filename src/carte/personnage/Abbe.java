@@ -27,7 +27,7 @@ public class Abbe extends Personnage {
 		try {
 			tmp.subOr(1);	//Le joueur le plus riche perd 1 or
 		} catch (PasAssezDOrException e) {}
-		partie.getJoueurCourant().addOr(1); //L'abb� gagne 1 or
+		partie.chercher(this).addOr(1); //L'abb� gagne 1 or
 	}
 	
 }
