@@ -1,4 +1,7 @@
-package carte;
+package carte.quartier;
+
+import carte.Carte;
+import carte.Famille;
 
 /**
  * @author Bauchet Clément
@@ -58,7 +61,8 @@ public class Quartier extends Carte implements Comparable<Quartier> {
 		{
 			retour += famille+",";
 		}
-		retour += prix;
+		retour += prix+")";
 		return retour;
 	}
+	
 }

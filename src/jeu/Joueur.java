@@ -1,11 +1,14 @@
 package jeu;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.TreeSet;
 
 import carte.Famille;
-import carte.Quartier;
 import carte.personnage.Personnage;
+import carte.quartier.ComparatorQuartierCout;
+import carte.quartier.ComparatorQuartierFamille;
+import carte.quartier.Quartier;
 
 /**
  * @author Bauchet Cl�ment
@@ -184,7 +187,47 @@ public class Joueur {
 		{
 			points += 2;
 		}
+		if(partie.isGagnant(this))
+		{
+			points += 2;
+		}
 		return points;
+	}
+	
+	private int getNbQuartierConstruit(Famille f) {
+		int nbQuartier = 0;
+		for(Quartier q : quartierConstruit)
+		{
+			if(q.getFamille().equals(f))
+			{
+				nbQuartier++;
+			}
+		}
+		return nbQuartier;
+	}
+	
+	public int getNbQuartierReligion() {
+		return getNbQuartierConstruit(Partie.religion);
+	}
+	
+	public int getNbQuartierNoblesse() {
+		return getNbQuartierConstruit(Partie.noblesse);
+	}
+	
+	public int getNbQuartierCommerce() {
+		return getNbQuartierConstruit(Partie.commerce);
+	}
+	
+	public int getNbQuartierMilitaire() {
+		return getNbQuartierConstruit(Partie.militaire);
+	}
+	
+	public int getNbQuartierMerveille() {
+		return getNbQuartierConstruit(Partie.merveille);
+	}
+	
+	public boolean equals(Joueur j) {
+		return (this.nom == j.nom);
 	}
 	
 	public String toString() {
@@ -201,4 +244,11 @@ public class Joueur {
 		return retour;
 	}
 	
+	public void trierQuartierConstruitFamille() {
+		Collections.sort(quartierConstruit, new ComparatorQuartierFamille());
+	}
+	
+	public void trierQuartierConstruitCout() {
+		Collections.sort(quartierConstruit, new ComparatorQuartierCout());
+	}
 }

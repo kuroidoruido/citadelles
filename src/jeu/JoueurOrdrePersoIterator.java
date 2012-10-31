@@ -25,19 +25,20 @@ public class JoueurOrdrePersoIterator implements Iterator<Joueur> {
 	 */
 	@Override
 	public boolean hasNext() {
-		boolean suivant = true;
-		int next;
-		if(joueurCourant == null)
+		boolean suivant = false;
+		if(joueurCourant == null && !partie.getListeJoueur().isEmpty())
 		{
-			next = 1;
+			suivant = true;
 		}
 		else
 		{
-			next = joueurCourant.getPerso().getOrdre()+1;
-		}
-		if(next <= 1 || 9 < next)
-		{
-			suivant = false;
+			for(Joueur j : partie.getListeJoueur())
+			{
+				if(j.getPerso().compareTo(joueurCourant.getPerso()) > 0)
+				{
+					suivant = true;
+				}
+			}
 		}
 		return suivant;
 	}
@@ -47,23 +48,45 @@ public class JoueurOrdrePersoIterator implements Iterator<Joueur> {
 	 */
 	@Override
 	public Joueur next() {
-		int ordreNext;
-		if(joueurCourant == null)
+		Joueur possibleSuivant = null;
+		if(joueurCourant != null)
 		{
-			ordreNext = 1;
+			for(Joueur j : partie.getListeJoueur())
+			{
+				if(j.getPerso().compareTo(joueurCourant.getPerso()) > 0)
+				{
+					if(possibleSuivant == null)
+					{
+						possibleSuivant = j;
+					}
+					else
+					{
+						if(j.getPerso().compareTo(possibleSuivant.getPerso()) < 0)
+						{
+							possibleSuivant = j;
+						}
+					}
+				}
+			}
 		}
 		else
 		{
-			ordreNext = joueurCourant.getPerso().getOrdre()+1;
-		}
-		
-		for(Joueur j : partie.getListeJoueur())
-		{
-			if(j.getPerso().getOrdre() == ordreNext)
+			for(Joueur j : partie.getListeJoueur())
 			{
-				joueurCourant = j;
+				if(possibleSuivant == null)
+				{
+					possibleSuivant = j;
+				}
+				else
+				{
+					if(j.getPerso().compareTo(possibleSuivant.getPerso()) < 0)
+					{
+						possibleSuivant = j;
+					}
+				}
 			}
 		}
+		joueurCourant = possibleSuivant;
 		return joueurCourant;
 	}
 

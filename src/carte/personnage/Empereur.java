@@ -2,6 +2,7 @@ package carte.personnage;
 
 import jeu.Joueur;
 import jeu.Partie;
+import carte.Carte;
 import carte.Famille;
 
 /**
@@ -14,7 +15,7 @@ public class Empereur extends Personnage {
 	
 	private Joueur joueurSelectionne;
 	public Empereur(Famille f, Partie partie) {
-		super("Empereur", f, "Désigne le premier joueur du tour suivant", 4, partie);
+		super("Empereur", f, "Désigne le premier joueur du tour suivant", 4, partie,Carte.effetPost);
 		joueurSelectionne = null;
 	}
 	

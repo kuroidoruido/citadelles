@@ -54,5 +54,7 @@ public class Famille implements Comparable<Famille> {
 		return this.nom.compareTo(f.nom);
 	}
 	
-	
+	public String toString() {
+		return nom;
+	}
 }

@@ -1,4 +1,6 @@
-package carte;
+package carte.quartier;
+
+import carte.Famille;
 
 /**
  * @author Bauchet Clément

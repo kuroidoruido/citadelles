@@ -1,6 +1,7 @@
 package carte.personnage;
 
 import jeu.Partie;
+import carte.Carte;
 import carte.Famille;
 
 /**
@@ -12,7 +13,7 @@ import carte.Famille;
 public class Condottiere extends Personnage {
 
 	public Condottiere(Famille f, Partie partie) {
-		super("Condottiere", f, "Peut détruire un quartier en dépensant le coût moins 1 pièce d'or", 8, partie);
+		super("Condottiere", f, "Peut détruire un quartier en dépensant le coût moins 1 pièce d'or", 8, partie,Carte.effetPost);
 	}
 	
 	public void capacite() {}

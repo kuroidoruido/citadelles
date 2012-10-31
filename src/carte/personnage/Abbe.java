@@ -3,6 +3,7 @@ package carte.personnage;
 import jeu.Joueur;
 import jeu.Partie;
 import jeu.PasAssezDOrException;
+import carte.Carte;
 import carte.Famille;
 
 /**
@@ -14,7 +15,7 @@ import carte.Famille;
 public class Abbe extends Personnage {
 
 	public Abbe(Famille f, Partie partie) {
-		super("Abbé", f, "Le joueur le plus riche lui donne 1 pièce d'or", 5, partie);
+		super("Abbé", f, "Le joueur le plus riche lui donne 1 pièce d'or", 5, partie,Carte.effetPre);
 	}
 	
 	public void capacite() {

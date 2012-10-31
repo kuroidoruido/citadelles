@@ -8,9 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import carte.Famille;
-import carte.Merveille;
-import carte.Quartier;
 import carte.personnage.*;
+import carte.quartier.Merveille;
+import carte.quartier.Quartier;
 
 /**
  * @author Bauchet Clément
@@ -23,9 +23,18 @@ public class Partie implements Iterable<Joueur> {
 	private int nombreDeTour;
 	private LinkedList<Joueur> listeJoueur;
 	private Joueur couronne;
+	private Joueur gagnant;
 	private LinkedList<Quartier> pileQuartier;
 	private ArrayList<Personnage> pilePerso;
 	private ArrayList<Personnage> listePersoJoue;
+	
+	// Création des familles de carte
+	public static Famille religion = new Famille("Religion", Color.blue);
+	public static Famille noblesse = new Famille("Noblesse", Color.yellow);
+	public static Famille commerce = new Famille("Commerce", Color.green);
+	public static Famille militaire = new Famille("Militaire", Color.red);
+	public static Famille merveille = new Famille("Merveille", Color.magenta);
+			
 	
 	/** Constructeur de Partie, initialise la partie en instanciant les listes et en distribuant les cartes.
 	 * @throws NombreDeJoueurIncorrectException 
@@ -145,12 +154,6 @@ public class Partie implements Iterable<Joueur> {
 	 * 
 	 */
 	private void initialiser() {
-		// Création des familles de carte
-		Famille religion = new Famille("Religion", Color.blue);
-		Famille noblesse = new Famille("Noblesse", Color.yellow);
-		Famille commerce = new Famille("Commerce", Color.green);
-		Famille militaire = new Famille("Militaire", Color.red);
-		Famille merveille = new Famille("Merveille", Color.magenta);
 		
 		// Création et ajout à la pile de chacune des cartes Quartier et Merveille
 		pileQuartier.clear();
@@ -254,13 +257,6 @@ public class Partie implements Iterable<Joueur> {
 	}
 	
 	/**
-	 * @return un Iterator<Joueur> qui permet de parcourir les joueurs selon leur ordre autour de la table, en commençant par le possésseur de la couronne.
-	 */
-	public Iterator<Joueur> iteratorTable() {
-		return listeJoueur.iterator();
-	}
-
-	/**
 	 * @return un Iterator<Joueur> qui permet de parcourir les joueurs selon l'ordre de leurs Personnage.
 	 */
 	public Iterator<Joueur> iterator() {
@@ -289,7 +285,7 @@ public class Partie implements Iterable<Joueur> {
 		boolean retour = true;
 		
 		// On vérifie le nombre de carte.
-		if((getNbJoueur() == 8 && listePersoJoue.size() != 9) || (getNbJoueur() < 7 && listePersoJoue.size() != 8))
+		if((getNbJoueur() < 7 && listePersoJoue.size() != 8) || (getNbJoueur() == 8 && listePersoJoue.size() != 9) || (listePersoJoue.size() > 9))
 		{
 			throw new NombreDePersonnageSelectionneIncorrectException("nombre de joueur = "+getNbJoueur()+" nombre de Personnage sélectionnés = "+listePersoJoue.size());
 		}
@@ -314,9 +310,11 @@ public class Partie implements Iterable<Joueur> {
 			}
 		}
 		int i =0;
+		String ordreString = "";
 		while(retour && i<9)
 		{
-			if(ordre[i] != 1 || (i==8 && ordre[i] != 0))
+			ordreString += ordre[i]+" ";
+			if((i < 7 & ordre[i] != 1) || (i == 8 && ordre[i] > 1))
 			{
 				retour = false;
 			}
@@ -324,7 +322,7 @@ public class Partie implements Iterable<Joueur> {
 		}
 		if(!retour)
 		{
-			throw new PlusieursPersonnageDuMemeOrdreException();
+			throw new PlusieursPersonnageDuMemeOrdreException(ordreString);
 		}
 
 		if(!roi)
@@ -341,12 +339,50 @@ public class Partie implements Iterable<Joueur> {
 		{
 			for(Personnage p : listePersoJoue)
 			{
-				if(p.memeOrdre(perso))
+				if(p.compareTo(perso) == 0)
 				{
 					retour = true;
 				}
 			}
 		}
 		return retour;
+	}
+	
+	public void trouverGagnant() {
+		gagnant = null;
+		Iterator<Joueur> iteJoueur = iterator();
+		Joueur j;
+		while(gagnant == null && iteJoueur.hasNext())
+		{
+			j = iteJoueur.next();
+			if(j.huitQuartier())
+			{
+				gagnant = j;
+			}
+		}
+	}
+	
+	public boolean isGagnant(Joueur j) {
+		return (gagnant == j);
+	}
+	
+	public ArrayList<Joueur> getClassement() {
+		ArrayList<Joueur> classement = new ArrayList<Joueur>();
+		ArrayList<Joueur> tmpListeJoueur = new ArrayList<Joueur>(listeJoueur);
+		Joueur tmp;
+		do
+		{
+			tmp = tmpListeJoueur.get(1);
+			for(Joueur j : tmpListeJoueur)
+			{
+				if(j.calculerPoints() > tmp.calculerPoints())
+				{
+					tmp = j;
+				}
+			}
+			classement.add(tmpListeJoueur.remove(tmpListeJoueur.indexOf(tmp)));
+		}
+		while(tmpListeJoueur.isEmpty());
+		return classement;
 	}
 }
