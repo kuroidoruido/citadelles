@@ -108,7 +108,7 @@ public class Joueur {
 		}
 		else
 		{
-			throw new PasAssezDOrException();
+			throw new PasAssezDOrException((new Integer(nbPieces)).toString());
 		}
 	}
 	
