@@ -4,7 +4,9 @@
 package jeu;
 
 /**
- * @author anthony
+ * Cette exception survient lorsque la liste des personnages sélectionnés contient plusieurs personnages dont l'ordre de passage est le même.
+ * On ne peut pas faire jouer deux personnages en même temps !
+ * @author Anthony Pena
  *
  */
 @SuppressWarnings("serial")
@@ -14,7 +16,7 @@ public class PlusieursPersonnageDuMemeOrdreException extends Exception {
 	 * 
 	 */
 	public PlusieursPersonnageDuMemeOrdreException() {
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -22,7 +24,7 @@ public class PlusieursPersonnageDuMemeOrdreException extends Exception {
 	 */
 	public PlusieursPersonnageDuMemeOrdreException(String message) {
 		super(message);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -30,7 +32,7 @@ public class PlusieursPersonnageDuMemeOrdreException extends Exception {
 	 */
 	public PlusieursPersonnageDuMemeOrdreException(Throwable cause) {
 		super(cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -40,7 +42,7 @@ public class PlusieursPersonnageDuMemeOrdreException extends Exception {
 	public PlusieursPersonnageDuMemeOrdreException(String message,
 			Throwable cause) {
 		super(message, cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 }

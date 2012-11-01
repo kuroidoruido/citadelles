@@ -1,7 +1,9 @@
 package jeu;
 
 /**
- * @author Bauchet ClÃ©ment
+ * Cette exception survient lorsqu'on essaie d'enlever à un joueur plus d'or qu'il n'en possède.
+ * Par exemple, lorsqu'un joueur essaie de construire un quartier trop cher pour lui...
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 25 oct. 2012
  *
@@ -13,7 +15,7 @@ public class PasAssezDOrException extends Exception {
 	 * 
 	 */
 	public PasAssezDOrException() {
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -21,7 +23,7 @@ public class PasAssezDOrException extends Exception {
 	 */
 	public PasAssezDOrException(String message) {
 		super(message);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -29,7 +31,7 @@ public class PasAssezDOrException extends Exception {
 	 */
 	public PasAssezDOrException(Throwable cause) {
 		super(cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -38,7 +40,7 @@ public class PasAssezDOrException extends Exception {
 	 */
 	public PasAssezDOrException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 }

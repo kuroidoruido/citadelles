@@ -5,7 +5,8 @@ import carte.Carte;
 import carte.Famille;
 
 /**
-* @author Bauchet ClÃ©ment
+ * Classe modélisant le personnage Roi.
+* @author Bauchet Clément
 * @author Pena Anthony
 * @version 29 oct. 2012
 *

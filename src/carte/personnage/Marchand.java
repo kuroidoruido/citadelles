@@ -5,7 +5,8 @@ import carte.Carte;
 import carte.Famille;
 
 /**
-* @author Bauchet ClÃƒÂ©ment
+ * Classe modélisant le personnage Marchand.
+* @author Bauchet Clément
 * @author Pena Anthony
 * @version 29 oct. 2012
 *
@@ -13,7 +14,7 @@ import carte.Famille;
 public class Marchand extends Personnage {
 
 	public Marchand(Famille f, Partie partie) {
-		super("Marchand", f, "Gagne une piÃ¨ce d'or de plus", 6, partie,Carte.effetPre);
+		super("Marchand", f, "Gagne une pièce d'or de plus", 6, partie,Carte.effetPre);
 	}
 	
 	public void capacite() {

@@ -1,7 +1,9 @@
 package jeu;
 
 /**
- * @author Bauchet ClÃ©ment
+ * Cette exception survient si un joueur essaie de construire un quartier qu'il a déjà construit.
+ * Dans cette version, on n'autorise pas les joueurs à construire deux fois le même quartier.
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 25 oct. 2012
  *
@@ -13,7 +15,7 @@ public class QuartierDejaConstruiteException extends Exception {
 	 * 
 	 */
 	public QuartierDejaConstruiteException() {
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -21,7 +23,7 @@ public class QuartierDejaConstruiteException extends Exception {
 	 */
 	public QuartierDejaConstruiteException(String message) {
 		super(message);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -29,7 +31,7 @@ public class QuartierDejaConstruiteException extends Exception {
 	 */
 	public QuartierDejaConstruiteException(Throwable cause) {
 		super(cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -38,7 +40,7 @@ public class QuartierDejaConstruiteException extends Exception {
 	 */
 	public QuartierDejaConstruiteException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 }

@@ -6,7 +6,7 @@ package jeu;
 import java.util.Iterator;
 
 /**
- * @author anthony
+ * @author Anthony Pena
  *
  */
 public class JoueurOrdrePersoIterator implements Iterator<Joueur> {
@@ -95,7 +95,7 @@ public class JoueurOrdrePersoIterator implements Iterator<Joueur> {
 	 */
 	@Override
 	public void remove() {
-		// TODO Stub de la mÃ©thode gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub de la méthode généré automatiquement
 
 	}
 

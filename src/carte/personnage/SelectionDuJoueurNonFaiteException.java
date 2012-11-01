@@ -4,7 +4,7 @@
 package carte.personnage;
 
 /**
- * @author anthony
+ * @author Anthony Pena
  *
  */
 @SuppressWarnings("serial")
@@ -14,7 +14,7 @@ public class SelectionDuJoueurNonFaiteException extends Exception {
 	 * 
 	 */
 	public SelectionDuJoueurNonFaiteException() {
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -22,7 +22,7 @@ public class SelectionDuJoueurNonFaiteException extends Exception {
 	 */
 	public SelectionDuJoueurNonFaiteException(String message) {
 		super(message);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -30,7 +30,7 @@ public class SelectionDuJoueurNonFaiteException extends Exception {
 	 */
 	public SelectionDuJoueurNonFaiteException(Throwable cause) {
 		super(cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class SelectionDuJoueurNonFaiteException extends Exception {
 	 */
 	public SelectionDuJoueurNonFaiteException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 }

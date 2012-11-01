@@ -4,7 +4,9 @@
 package jeu;
 
 /**
- * @author anthony
+ * Cette exception survient si le nombre de joueurs correspondant à une partie est incorrect
+ * Ce nombre doit être compris entre 3 et 8.
+ * @author Anthony
  *
  */
 @SuppressWarnings("serial")
@@ -14,7 +16,7 @@ public class NombreDeJoueurIncorrectException extends Exception {
 	 * 
 	 */
 	public NombreDeJoueurIncorrectException() {
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -22,7 +24,7 @@ public class NombreDeJoueurIncorrectException extends Exception {
 	 */
 	public NombreDeJoueurIncorrectException(String message) {
 		super(message);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -30,7 +32,7 @@ public class NombreDeJoueurIncorrectException extends Exception {
 	 */
 	public NombreDeJoueurIncorrectException(Throwable cause) {
 		super(cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -39,7 +41,7 @@ public class NombreDeJoueurIncorrectException extends Exception {
 	 */
 	public NombreDeJoueurIncorrectException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 }

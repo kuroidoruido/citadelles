@@ -4,7 +4,9 @@
 package jeu;
 
 /**
- * @author anthony
+ * Cette exception surviet lorsque le nombre de personnages sélectionnés n'est pas valide
+ * Le nombre de personnages sélectionnés doit être égal au nombre de joueurs plus un.
+ * @author Anthony Pena
  *
  */
 @SuppressWarnings("serial")
@@ -14,7 +16,7 @@ public class NombreDePersonnageSelectionneIncorrectException extends Exception {
 	 * 
 	 */
 	public NombreDePersonnageSelectionneIncorrectException() {
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -22,7 +24,7 @@ public class NombreDePersonnageSelectionneIncorrectException extends Exception {
 	 */
 	public NombreDePersonnageSelectionneIncorrectException(String message) {
 		super(message);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -30,7 +32,7 @@ public class NombreDePersonnageSelectionneIncorrectException extends Exception {
 	 */
 	public NombreDePersonnageSelectionneIncorrectException(Throwable cause) {
 		super(cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -40,7 +42,7 @@ public class NombreDePersonnageSelectionneIncorrectException extends Exception {
 	public NombreDePersonnageSelectionneIncorrectException(String message,
 			Throwable cause) {
 		super(message, cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 }

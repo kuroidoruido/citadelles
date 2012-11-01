@@ -5,7 +5,8 @@ import carte.Carte;
 import carte.Famille;
 
 /**
-* @author Bauchet Cl√©ment
+ * Classe modÈlisant le personnage Architecte.
+* @author Bauchet ClÈment
 * @author Pena Anthony
 * @version 29 oct. 2012
 *
@@ -13,11 +14,11 @@ import carte.Famille;
 public class Architecte extends Personnage {
 
 	public Architecte(Famille f, Partie partie) {
-		super("Architecte", f, "Peut b√¢tir jusqu'√† 3 quartiers", 7, partie,Carte.effetPre);
+		super("Architecte", f, "Peut b‚tir jusqu'‡ 3 quartiers", 7, partie,Carte.effetPre);
 	}
 	
 	public void capacite() {
-		partie.chercher(this).addDroitConstruction(2); //L'architecte a le droit de construire 2 b√¢timents de plus
+		partie.chercher(this).addDroitConstruction(2); //L'architecte a le droit de construire 2 b‚timents de plus
 	}
 	
 }

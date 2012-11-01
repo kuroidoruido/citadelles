@@ -12,7 +12,7 @@ import jeu.Joueur;
 import jeu.Partie;
 
 /**
-* @author Bauchet ClÃ©ment
+* @author Bauchet Clément
 * @author Pena Anthony
 * @version 29 oct. 2012
 *
@@ -30,21 +30,21 @@ public class Application {
 		listeJoueur.add("Joueur 2");
 		listeJoueur.add("Joueur 3");
 		
-		// On crÃ©ait une partie initialisÃ©e
+		// On crée une nouvelle partie initialisée
 		Partie partie = new Partie(listeJoueur);
 		
-		// Variables nÃ©cessaire au dÃ©roulement d'un tour de jeu
-		ArrayList<Personnage> listePersoChoisit;
-		Iterator<Quartier> iteQuartier;
+		// Variables nécessaires au déroulement d'un tour de jeu
+		ArrayList<Personnage> listePersoChoisit; //Liste des personnages choisis par les joueurs
+		Iterator<Quartier> iteQuartier; //Un itérateur pour parcourir la main des joueurs
 		Quartier quartierOk;
 		do
 		{
-			// On sÃ©lectionne les personnages qui seront jouÃ©s
-			Collections.shuffle(partie.getPilePerso());
+			// On sélectionne les personnages qui seront joués
+			Collections.shuffle(partie.getPilePerso()); //On mélange la pile de personnages à piocher
 			listePersoChoisit = new ArrayList<Personnage>();
-			for(Personnage p : partie.getPilePerso())
+			for(Personnage p : partie.getPilePerso()) //On parcourt chaque personnage de la pile
 			{
-				if(!partie.ordreDejaSelectionne(p))
+				if(!partie.ordreDejaSelectionne(p)) //On s'assure de ne pas piocher 2 personnages de même ordre
 				{
 					if(p.getOrdre() < 9)
 					{
@@ -57,10 +57,10 @@ public class Application {
 					partie.selectPerso(listePersoChoisit);
 				}
 			}
-			// On vÃ©rifie que toutes les conditions sont respectÃ©es
+			// On vérifie que toutes les conditions sont respectées
 			partie.verifierPersoSelectionne();
 			
-			// On attribut un personnage Ã  chaque joueur
+			// On attribue un personnage à chaque joueur
 			Collections.shuffle(partie.getListePersoJoue());
 			for(Joueur j : partie.getListeJoueur())
 			{
@@ -70,12 +70,12 @@ public class Application {
 			// Chaque joueur joue son tour selon l'ordre des Personnages.
 			for(Joueur j : partie)
 			{
-				// On autorise le joueur utiliser son effet
+				// On autorise le joueur à utiliser son effet
 				droitEffet = 1;
-				// le Joueur gagne une piÃ¨ce d'or pour chaque quartier construit
+				// le Joueur gagne une pièce d'or pour chaque quartier de sa famille construit
 				j.addOrQuartier();
-				// Un joueur peu soit piocher 2 Quartier soit prendre 2 piÃ¨ces
-				if(Math.random() < 0.5) // true or false alÃ©atoirement
+				// Un joueur peut soit piocher 2 Quartiers soit prendre 2 pièces
+				if(Math.random() < 0.5) //Ici, le choix est fait aléatoirement
 				{
 					j.addOr(2);
 				}
@@ -84,7 +84,7 @@ public class Application {
 					partie.piocherQuartier(j, 2);
 				}
 				
-				// Si la capacitÃ© de son personnage peut Ãªtre appliquÃ© maintenant, le joueur peut l'activer
+				// Si la capacité de son personnage peut être appliquée maintenant, le joueur peut l'activer
 				if(droitEffet > 0 && (j.getPerso().getInstantEffet() == Carte.effetPre || j.getPerso().getInstantEffet() == Carte.effetPreOuPost))
 				{
 					j.getPerso().capacite();
@@ -99,7 +99,7 @@ public class Application {
 					while(iteQuartier.hasNext() && quartierOk == null)
 					{
 						quartierOk = iteQuartier.next();
-						if(quartierOk.getPrix() < j.getOr())
+						if(quartierOk.getPrix() < j.getOr()) //Le joueur doit avoir assez d'or pour construire
 						{
 							quartierOk = null;
 						}
@@ -110,7 +110,7 @@ public class Application {
 					}
 				}
 				
-				// Si la capacitÃ© de son personnage peut Ãªtre appliquÃ© maintenant, le joueur peut l'activer
+				// Si la capacité de son personnage peut être appliquée maintenant, le joueur peut l'activer
 				if(droitEffet > 0 && j.getPerso().getInstantEffet() == Carte.effetPost)
 				{	
 					if(j.getPerso().getNom() == "Empereur")
@@ -126,6 +126,6 @@ public class Application {
 		// Si aucun joueur n'a construit 8 quartiers, on refait un tour de jeu
 		}
 		while(partie.huitQuartiers());
-		System.out.println(partie.getClassement().size());
+		System.out.println(partie.getClassement().size()); //A la fin de la partie, on affiche le classsement des joueurs.
 	}
 }

@@ -4,7 +4,9 @@
 package jeu;
 
 /**
- * @author anthony
+ * Cette exception survient lorsque la liste de personnages sélectionnés ne contient ni Roi ni Empereur.
+ * Il faut au moins un des deux.
+ * @author Anthony Pena
  *
  */
 @SuppressWarnings("serial")
@@ -14,7 +16,7 @@ public class PasDeRoiOuDEmpereurException extends Exception {
 	 * 
 	 */
 	public PasDeRoiOuDEmpereurException() {
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -22,7 +24,7 @@ public class PasDeRoiOuDEmpereurException extends Exception {
 	 */
 	public PasDeRoiOuDEmpereurException(String message) {
 		super(message);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -30,7 +32,7 @@ public class PasDeRoiOuDEmpereurException extends Exception {
 	 */
 	public PasDeRoiOuDEmpereurException(Throwable cause) {
 		super(cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -39,7 +41,7 @@ public class PasDeRoiOuDEmpereurException extends Exception {
 	 */
 	public PasDeRoiOuDEmpereurException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 }

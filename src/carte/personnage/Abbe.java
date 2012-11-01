@@ -7,7 +7,8 @@ import carte.Carte;
 import carte.Famille;
 
 /**
- * @author Bauchet ClÃ©ment
+ * Classe modélisant le personnage Abbé.
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 29 oct. 2012
  *
@@ -15,7 +16,7 @@ import carte.Famille;
 public class Abbe extends Personnage {
 
 	public Abbe(Famille f, Partie partie) {
-		super("AbbÃ©", f, "Le joueur le plus riche lui donne 1 piÃ¨ce d'or", 5, partie,Carte.effetPre);
+		super("Abbé", f, "Le joueur le plus riche lui donne 1 pièce d'or", 5, partie,Carte.effetPre);
 	}
 	
 	public void capacite() {
@@ -28,7 +29,7 @@ public class Abbe extends Personnage {
 		try {
 			tmp.subOr(1);	//Le joueur le plus riche perd 1 or
 		} catch (PasAssezDOrException e) {}
-		partie.chercher(this).addOr(1); //L'abbï¿½ gagne 1 or
+		partie.chercher(this).addOr(1); //L'abbé gagne 1 or
 	}
 	
 }
