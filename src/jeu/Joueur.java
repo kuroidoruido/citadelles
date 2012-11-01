@@ -120,7 +120,7 @@ public class Joueur {
 				throw new BatimentDejaConstruiteException();
 			}
 			Joueur bailli = partie.chercher("Bailli");
-			if(bailli != null)
+			if(this.perso.getOrdre() >= 2 && bailli != null)
 			{
 				try {
 					subOr(b.getPrix()+1);

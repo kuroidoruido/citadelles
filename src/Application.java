@@ -132,7 +132,7 @@ public class Application {
 		int i = 1;
 		for(Joueur j : partie.getClassement())
 		{
-			System.out.println(i+" "+j.getNom());
+			System.out.println(i+" "+j.getNom()+" ("+j.calculerPoints()+"pts)");
 			i++;
 		}
 	}
