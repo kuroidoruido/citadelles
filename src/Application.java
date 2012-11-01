@@ -8,8 +8,16 @@ import carte.batiment.Batiment;
 import carte.personnage.Empereur;
 import carte.personnage.Personnage;
 
+import jeu.BatimentDejaConstruiteException;
+import jeu.BatimentPasDansLaMainException;
 import jeu.Joueur;
+import jeu.NombreDeJoueurIncorrectException;
+import jeu.NombreDePersonnageSelectionneIncorrectException;
 import jeu.Partie;
+import jeu.PasAssezDOrException;
+import jeu.PasDeRoiOuDEmpereurException;
+import jeu.PlusDeBatimentDansLaPileException;
+import jeu.PlusieursPersonnageDuMemeOrdreException;
 
 /**
 * @author Bauchet Clément
@@ -23,7 +31,7 @@ public class Application {
 	 * @param args
 	 * @throws Exception 
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		// On liste les joueurs
 		LinkedList<String> listeJoueur = new LinkedList<String>();
 		listeJoueur.add("Joueur 1");
@@ -31,7 +39,13 @@ public class Application {
 		listeJoueur.add("Joueur 3");
 		
 		// On créait une partie initialisée
-		Partie partie = new Partie(listeJoueur);
+		Partie partie = null;
+		try {
+			partie = new Partie(listeJoueur);
+		} catch (NombreDeJoueurIncorrectException e) {
+			System.out.println("Le nombre de joueur indiqué est incorrect !");
+			System.exit(0);
+		}
 		
 		// Variables nécessaire au déroulement d'un tour de jeu
 		ArrayList<Personnage> listePersoChoisit;
@@ -60,7 +74,18 @@ public class Application {
 				}
 			}
 			// On vérifie que toutes les conditions sont respectées
-			partie.verifierPersoSelectionne();
+			try {
+				partie.verifierPersoSelectionne();
+			} catch (NombreDePersonnageSelectionneIncorrectException e) {
+				System.out.println("Le nombre de personnage sélectionné est incorrect !");
+				System.exit(0);
+			} catch (PlusieursPersonnageDuMemeOrdreException e) {
+				System.out.println("Plusieurs personnage du même ordre ont été sélectionnés !");
+				System.exit(0);
+			} catch (PasDeRoiOuDEmpereurException e) {
+				System.out.println("Il faut sélectionné le Roi ou l'Empereur !");
+				System.exit(0);
+			}
 			
 			// On attribut un personnage à chaque joueur
 			Collections.shuffle(partie.getListePersoJoue());
@@ -81,7 +106,11 @@ public class Application {
 				// Un joueur peu soit piocher 2 Quartier soit prendre 2 pièces
 				if(!partie.pileBatimentVide() && Math.random() < 0.5) // true or false aléatoirement
 				{
-					partie.piocherBatiment(j, 2);
+					try {
+						partie.piocherBatiment(j, 2);
+					} catch (PlusDeBatimentDansLaPileException e) {
+						System.out.println("Impossible de piocher la pile de Batiment est vide.");
+					}
 				}
 				else
 				{
@@ -91,7 +120,11 @@ public class Application {
 				// Si la capacité de son personnage peut être appliqué maintenant, le joueur peut l'activer
 				if(droitEffet > 0 && (j.getPerso().getInstantEffet().getValeur() == InstantEffet.effetPre || j.getPerso().getInstantEffet().getValeur() == InstantEffet.effetPreOuPost))
 				{
-					j.getPerso().capacite();
+					try {
+						j.getPerso().capacite();
+					} catch (Exception e) {
+						System.out.println("Des conditions n'ont pas été respecté pour activer l'effet d'un personnage !");
+					}
 					droitEffet--;
 				}
 				
@@ -112,7 +145,20 @@ public class Application {
 						}
 						if(batimentOk != null)
 						{
-							j.construireBatiment(batimentOk);
+							try {
+								j.construireBatiment(batimentOk);
+							} catch (BatimentPasDansLaMainException e) {
+								System.out.println("Vous ne pouvez pas construire un batiment qui n'est pas dans votre main !");
+							} catch (BatimentDejaConstruiteException e) {
+								System.out.println("Le batiment sélectionné a déjà été construit !");
+							} catch (PasAssezDOrException e) {
+								System.out.println("Vous ne possédez pas assez d'or pour construire ce batiment !");
+							}
+						}
+						else
+						{
+							// Si aucun batiment de la main ne peut être construit on sort de la boucle
+							j.setDroitConstruction(0);
 						}
 					}
 				}
@@ -124,7 +170,11 @@ public class Application {
 					{
 						((Empereur)j.getPerso()).selectJoueur(partie.getListeJoueur().get((new Double(Math.random()*partie.getNbJoueur()).intValue())));
 					}
-					j.getPerso().capacite();
+					try {
+						j.getPerso().capacite();
+					} catch (Exception e) {
+						System.out.println("Des conditions n'ont pas été respecté pour activer l'effet d'un personnage !");
+					}
 					droitEffet--;
 				}
 				System.out.println(j+"\nPersonnage = "+j.getPerso()+"\n");

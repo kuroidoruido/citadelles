@@ -112,7 +112,7 @@ public class Joueur {
 		}
 	}
 	
-	public void construireBatiment(Batiment b) throws BatimentPasDansLaMainException, BatimentDejaConstruiteException {
+	public void construireBatiment(Batiment b) throws BatimentPasDansLaMainException, BatimentDejaConstruiteException, PasAssezDOrException {
 		if(main.contains(b))
 		{
 			if(batimentConstruit.contains(b))
@@ -122,20 +122,12 @@ public class Joueur {
 			Joueur bailli = partie.chercher("Bailli");
 			if(this.perso.getOrdre() >= 2 && bailli != null)
 			{
-				try {
 					subOr(b.getPrix()+1);
 					bailli.addOr(1);
-				} catch (PasAssezDOrException e) {
-					e.printStackTrace();
-				}
 			}
 			else
 			{
-				try {
 					subOr(b.getPrix());
-				} catch (PasAssezDOrException e) {
-					e.printStackTrace();
-				}
 			}
 			droitConstruction--;
 			main.remove(b);
