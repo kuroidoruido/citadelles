@@ -7,19 +7,19 @@ package jeu;
  *
  */
 @SuppressWarnings("serial")
-public class QuartierDejaConstruiteException extends Exception {
+public class BatimentDejaConstruiteException extends Exception {
 
 	/**
 	 * 
 	 */
-	public QuartierDejaConstruiteException() {
+	public BatimentDejaConstruiteException() {
 		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
 	 * @param message
 	 */
-	public QuartierDejaConstruiteException(String message) {
+	public BatimentDejaConstruiteException(String message) {
 		super(message);
 		// TODO Stub du constructeur généré automatiquement
 	}
@@ -27,7 +27,7 @@ public class QuartierDejaConstruiteException extends Exception {
 	/**
 	 * @param cause
 	 */
-	public QuartierDejaConstruiteException(Throwable cause) {
+	public BatimentDejaConstruiteException(Throwable cause) {
 		super(cause);
 		// TODO Stub du constructeur généré automatiquement
 	}
@@ -36,7 +36,7 @@ public class QuartierDejaConstruiteException extends Exception {
 	 * @param message
 	 * @param cause
 	 */
-	public QuartierDejaConstruiteException(String message, Throwable cause) {
+	public BatimentDejaConstruiteException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Stub du constructeur généré automatiquement
 	}

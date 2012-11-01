@@ -49,7 +49,6 @@ public class Famille implements Comparable<Famille> {
 		return (this.nom == f.nom && this.couleur == f.couleur);
 	}
 
-
 	public int compareTo(Famille f) {
 		return this.nom.compareTo(f.nom);
 	}

@@ -8,9 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import carte.Famille;
+import carte.batiment.Batiment;
+import carte.batiment.Merveille;
+import carte.batiment.Quartier;
 import carte.personnage.*;
-import carte.quartier.Merveille;
-import carte.quartier.Quartier;
 
 /**
  * @author Bauchet Clément
@@ -24,7 +25,7 @@ public class Partie implements Iterable<Joueur> {
 	private LinkedList<Joueur> listeJoueur;
 	private Joueur couronne;
 	private Joueur gagnant;
-	private LinkedList<Quartier> pileQuartier;
+	private LinkedList<Batiment> pileBatiment;
 	private ArrayList<Personnage> pilePerso;
 	private ArrayList<Personnage> listePersoJoue;
 	
@@ -34,7 +35,6 @@ public class Partie implements Iterable<Joueur> {
 	public static Famille commerce = new Famille("Commerce", Color.green);
 	public static Famille militaire = new Famille("Militaire", Color.red);
 	public static Famille merveille = new Famille("Merveille", Color.magenta);
-			
 	
 	/** Constructeur de Partie, initialise la partie en instanciant les listes et en distribuant les cartes.
 	 * @throws NombreDeJoueurIncorrectException 
@@ -50,7 +50,7 @@ public class Partie implements Iterable<Joueur> {
 			{
 				this.listeJoueur.add((new Joueur(j,this)));
 			}
-			this.pileQuartier = new LinkedList<Quartier>();
+			this.pileBatiment = new LinkedList<Batiment>();
 			this.pilePerso = new ArrayList<Personnage>();
 			this.listePersoJoue = new ArrayList<Personnage>();
 			initialiser();
@@ -89,6 +89,15 @@ public class Partie implements Iterable<Joueur> {
 		return tmp;
 	}
 	
+	public Joueur chercher(String p) {
+		Joueur tmp = null;
+		for(Joueur j : listeJoueur) {
+			if (j.getPerso().getNom() == p) {
+				tmp = j;
+			}
+		}
+		return tmp;
+	}
 	
 	/**
 	 * @return le joueur qui détient la couronne
@@ -112,40 +121,24 @@ public class Partie implements Iterable<Joueur> {
 	}
 
 	/**
-	 * 
-	 * @return true si un bailli est présent en jeu
-	 */
-	public Joueur isThereBailli() {
-		Joueur tmp = null;
-		for(Joueur j : listeJoueur)
-		{
-			if(j.getPerso().getNom().equals("Bailli"))
-			{
-				tmp = j;
-			}
-		}
-		return tmp;
-	}
-	
-	/**
 	 * @param nbQuartier le nombre de quartier à piocher
 	 * @return les nbQuartier premiers quartiers de la pile de quartier
 	 */
-	public void piocherQuartier(Joueur j, int nbQuartier) {
-		for(int i=0; i<nbQuartier; i++)
+	public void piocherBatiment(Joueur j, int nbBatiment) {
+		for(int i=0; i<nbBatiment; i++)
 		{
-			j.addCarteMain(pileQuartier.removeFirst());
+			j.addCarteMain(pileBatiment.removeFirst());
 		}
 	}
 	
 	/**
 	 * @return true si au moins un des joueurs à construit 8 quartiers
 	 */
-	public boolean huitQuartiers() {
+	public boolean huitBatiments() {
 		boolean retour = false;
 		for(Joueur j : listeJoueur)
 		{
-			retour = (retour || j.huitQuartier());
+			retour = (retour || j.huitBatiments());
 		}
 		return retour;
 	}
@@ -156,78 +149,78 @@ public class Partie implements Iterable<Joueur> {
 	private void initialiser() {
 		
 		// Création et ajout à la pile de chacune des cartes Quartier et Merveille
-		pileQuartier.clear();
-		pileQuartier.add(new Quartier("Temple",religion,1));
-		pileQuartier.add(new Quartier("Temple",religion,1));
-		pileQuartier.add(new Quartier("Temple",religion,1));
-		pileQuartier.add(new Quartier("Eglise",religion,2));
-		pileQuartier.add(new Quartier("Eglise",religion,2));
-		pileQuartier.add(new Quartier("Eglise",religion,2));
-		pileQuartier.add(new Quartier("Eglise",religion,2));
-		pileQuartier.add(new Quartier("Monastère",religion,3));
-		pileQuartier.add(new Quartier("Monastère",religion,3));
-		pileQuartier.add(new Quartier("Monastère",religion,3));
-		pileQuartier.add(new Quartier("Cathédrale",religion,5));
-		pileQuartier.add(new Quartier("Cathédrale",religion,5));
+		pileBatiment.clear();
+		pileBatiment.add(new Quartier("Temple",religion,1));
+		pileBatiment.add(new Quartier("Temple",religion,1));
+		pileBatiment.add(new Quartier("Temple",religion,1));
+		pileBatiment.add(new Quartier("Eglise",religion,2));
+		pileBatiment.add(new Quartier("Eglise",religion,2));
+		pileBatiment.add(new Quartier("Eglise",religion,2));
+		pileBatiment.add(new Quartier("Eglise",religion,2));
+		pileBatiment.add(new Quartier("Monastère",religion,3));
+		pileBatiment.add(new Quartier("Monastère",religion,3));
+		pileBatiment.add(new Quartier("Monastère",religion,3));
+		pileBatiment.add(new Quartier("Cathédrale",religion,5));
+		pileBatiment.add(new Quartier("Cathédrale",religion,5));
 
-		pileQuartier.add(new Quartier("Manoir",noblesse,3));
-		pileQuartier.add(new Quartier("Manoir",noblesse,3));
-		pileQuartier.add(new Quartier("Manoir",noblesse,3));
-		pileQuartier.add(new Quartier("Manoir",noblesse,3));
-		pileQuartier.add(new Quartier("Manoir",noblesse,3));
-		pileQuartier.add(new Quartier("Château",noblesse,4));
-		pileQuartier.add(new Quartier("Château",noblesse,4));
-		pileQuartier.add(new Quartier("Château",noblesse,4));
-		pileQuartier.add(new Quartier("Château",noblesse,4));
-		pileQuartier.add(new Quartier("Palais",noblesse,5));
-		pileQuartier.add(new Quartier("Palais",noblesse,5));
+		pileBatiment.add(new Quartier("Manoir",noblesse,3));
+		pileBatiment.add(new Quartier("Manoir",noblesse,3));
+		pileBatiment.add(new Quartier("Manoir",noblesse,3));
+		pileBatiment.add(new Quartier("Manoir",noblesse,3));
+		pileBatiment.add(new Quartier("Manoir",noblesse,3));
+		pileBatiment.add(new Quartier("Château",noblesse,4));
+		pileBatiment.add(new Quartier("Château",noblesse,4));
+		pileBatiment.add(new Quartier("Château",noblesse,4));
+		pileBatiment.add(new Quartier("Château",noblesse,4));
+		pileBatiment.add(new Quartier("Palais",noblesse,5));
+		pileBatiment.add(new Quartier("Palais",noblesse,5));
 
-		pileQuartier.add(new Quartier("Taverne",commerce,1));
-		pileQuartier.add(new Quartier("Taverne",commerce,1));
-		pileQuartier.add(new Quartier("Taverne",commerce,1));
-		pileQuartier.add(new Quartier("Taverne",commerce,1));
-		pileQuartier.add(new Quartier("Taverne",commerce,1));
-		pileQuartier.add(new Quartier("Échoppe",commerce,2));
-		pileQuartier.add(new Quartier("Échoppe",commerce,2));
-		pileQuartier.add(new Quartier("Échoppe",commerce,2));
-		pileQuartier.add(new Quartier("Marché",commerce,2));
-		pileQuartier.add(new Quartier("Marché",commerce,2));
-		pileQuartier.add(new Quartier("Marché",commerce,2));
-		pileQuartier.add(new Quartier("Marché",commerce,2));
-		pileQuartier.add(new Quartier("Comptoir",commerce,3));
-		pileQuartier.add(new Quartier("Comptoir",commerce,3));
-		pileQuartier.add(new Quartier("Comptoir",commerce,3));
-		pileQuartier.add(new Quartier("Port",commerce,4));
-		pileQuartier.add(new Quartier("Port",commerce,4));
-		pileQuartier.add(new Quartier("Port",commerce,4));
-		pileQuartier.add(new Quartier("Hôtel de ville",commerce,5));
-		pileQuartier.add(new Quartier("Hôtel de ville",commerce,5));
+		pileBatiment.add(new Quartier("Taverne",commerce,1));
+		pileBatiment.add(new Quartier("Taverne",commerce,1));
+		pileBatiment.add(new Quartier("Taverne",commerce,1));
+		pileBatiment.add(new Quartier("Taverne",commerce,1));
+		pileBatiment.add(new Quartier("Taverne",commerce,1));
+		pileBatiment.add(new Quartier("Échoppe",commerce,2));
+		pileBatiment.add(new Quartier("Échoppe",commerce,2));
+		pileBatiment.add(new Quartier("Échoppe",commerce,2));
+		pileBatiment.add(new Quartier("Marché",commerce,2));
+		pileBatiment.add(new Quartier("Marché",commerce,2));
+		pileBatiment.add(new Quartier("Marché",commerce,2));
+		pileBatiment.add(new Quartier("Marché",commerce,2));
+		pileBatiment.add(new Quartier("Comptoir",commerce,3));
+		pileBatiment.add(new Quartier("Comptoir",commerce,3));
+		pileBatiment.add(new Quartier("Comptoir",commerce,3));
+		pileBatiment.add(new Quartier("Port",commerce,4));
+		pileBatiment.add(new Quartier("Port",commerce,4));
+		pileBatiment.add(new Quartier("Port",commerce,4));
+		pileBatiment.add(new Quartier("Hôtel de ville",commerce,5));
+		pileBatiment.add(new Quartier("Hôtel de ville",commerce,5));
 
-		pileQuartier.add(new Quartier("Tour de guet",militaire,1));
-		pileQuartier.add(new Quartier("Tour de guet",militaire,1));
-		pileQuartier.add(new Quartier("Tour de guet",militaire,1));
-		pileQuartier.add(new Quartier("Prison",militaire,2));
-		pileQuartier.add(new Quartier("Prison",militaire,2));
-		pileQuartier.add(new Quartier("Prison",militaire,2));
-		pileQuartier.add(new Quartier("Caserne",militaire,3));
-		pileQuartier.add(new Quartier("Caserne",militaire,3));
-		pileQuartier.add(new Quartier("Caserne",militaire,3));
-		pileQuartier.add(new Quartier("Forteresse",militaire,5));
-		pileQuartier.add(new Quartier("Forteresse",militaire,5));
+		pileBatiment.add(new Quartier("Tour de guet",militaire,1));
+		pileBatiment.add(new Quartier("Tour de guet",militaire,1));
+		pileBatiment.add(new Quartier("Tour de guet",militaire,1));
+		pileBatiment.add(new Quartier("Prison",militaire,2));
+		pileBatiment.add(new Quartier("Prison",militaire,2));
+		pileBatiment.add(new Quartier("Prison",militaire,2));
+		pileBatiment.add(new Quartier("Caserne",militaire,3));
+		pileBatiment.add(new Quartier("Caserne",militaire,3));
+		pileBatiment.add(new Quartier("Caserne",militaire,3));
+		pileBatiment.add(new Quartier("Forteresse",militaire,5));
+		pileBatiment.add(new Quartier("Forteresse",militaire,5));
 
-		pileQuartier.add(new Merveille("Cour des miracles",merveille,2,"Pour le décompte final des points, la cour des miracles est considérée comme un quartier de la couleur de votre choix. Vous ne pouvez pas utilisez cette capacité si vous avez construit la cour des miracles au dernier tour de jeu.",0));
-		pileQuartier.add(new Merveille("Donjon",merveille,3,"Le Donjon ne peut pas être détruit par le Condottière.",0));
-		pileQuartier.add(new Merveille("Laboratoire",merveille,5,"Une fois par tour, vous pouvez vous défausser d'une carte quartier de votre main et recevoir une pièce d'or en contrepartie",0));
-		pileQuartier.add(new Merveille("Manufacture",merveille,5,"Une fois par tour, vous pouvez payer trois pièces d'or pour piocher trois cartes.",0));
-		pileQuartier.add(new Merveille("Observatoire",merveille,3,"Si vous choisissez de piocher des cartes au début de votre tour, vous en piochez trois, en choisissez une et défaussez les deux autres.",0));
-		pileQuartier.add(new Merveille("Cimetière",merveille,5,"Lorsque le Condottière détruit un quartier, vous pouvez payer une pièce d'or pour le reprendre dans votre main. Vous ne pouvez pas faire cela si vous êtes vous-même Condottiere.",0));
-		pileQuartier.add(new Merveille("Bibliothèque",merveille,6,"Si vous choisissez de piocher des cartes au début de votre tour, vous en piochez deux et les conservez toutes les deux.",0));
-		pileQuartier.add(new Merveille("École de Magie",merveille,6,"Pour la perception des revenus, l'école de magie est considérée comme un quartier de la couleur de votre choix, elle vous rapporte donc si vous êtes, Roi, Evêque, Marchand ou Condottiere",0));
-		pileQuartier.add(new Merveille("Université",merveille,6,"Cette réalisation de prestige (nul n'a jamais compris à quoi pouvait bien servir une université) coûte six pièces d'or à bâtir mais vaut huit points dans le décompte de fin de partie.",2));
-		pileQuartier.add(new Merveille("Dracoport",merveille,6,"Cette réalisation de prestige (on n'a pas vu de dragon dans le Royaume depuis bientôt mille ans) coûte six pièces d'or à bâtir mais vaut huit points dans le décompte de fin de partie.",2));
+		pileBatiment.add(new Merveille("Cour des miracles",merveille,2,"Pour le décompte final des points, la cour des miracles est considérée comme un quartier de la couleur de votre choix. Vous ne pouvez pas utilisez cette capacité si vous avez construit la cour des miracles au dernier tour de jeu.",0));
+		pileBatiment.add(new Merveille("Donjon",merveille,3,"Le Donjon ne peut pas être détruit par le Condottière.",0));
+		pileBatiment.add(new Merveille("Laboratoire",merveille,5,"Une fois par tour, vous pouvez vous défausser d'une carte quartier de votre main et recevoir une pièce d'or en contrepartie",0));
+		pileBatiment.add(new Merveille("Manufacture",merveille,5,"Une fois par tour, vous pouvez payer trois pièces d'or pour piocher trois cartes.",0));
+		pileBatiment.add(new Merveille("Observatoire",merveille,3,"Si vous choisissez de piocher des cartes au début de votre tour, vous en piochez trois, en choisissez une et défaussez les deux autres.",0));
+		pileBatiment.add(new Merveille("Cimetière",merveille,5,"Lorsque le Condottière détruit un quartier, vous pouvez payer une pièce d'or pour le reprendre dans votre main. Vous ne pouvez pas faire cela si vous êtes vous-même Condottiere.",0));
+		pileBatiment.add(new Merveille("Bibliothèque",merveille,6,"Si vous choisissez de piocher des cartes au début de votre tour, vous en piochez deux et les conservez toutes les deux.",0));
+		pileBatiment.add(new Merveille("École de Magie",merveille,6,"Pour la perception des revenus, l'école de magie est considérée comme un quartier de la couleur de votre choix, elle vous rapporte donc si vous êtes, Roi, Evêque, Marchand ou Condottiere",0));
+		pileBatiment.add(new Merveille("Université",merveille,6,"Cette réalisation de prestige (nul n'a jamais compris à quoi pouvait bien servir une université) coûte six pièces d'or à bâtir mais vaut huit points dans le décompte de fin de partie.",2));
+		pileBatiment.add(new Merveille("Dracoport",merveille,6,"Cette réalisation de prestige (on n'a pas vu de dragon dans le Royaume depuis bientôt mille ans) coûte six pièces d'or à bâtir mais vaut huit points dans le décompte de fin de partie.",2));
 
 		// Mélange aléatoire de la pile de Quartier
-		Collections.shuffle((List<Quartier>)(pileQuartier));
+		Collections.shuffle((List<Batiment>)(pileBatiment));
 
 		// Création et ajout des cartes Personnage à la liste des Personnages
 		pilePerso.clear();
@@ -245,10 +238,10 @@ public class Partie implements Iterable<Joueur> {
 		// On distribue à chaque joueur 4 cartes Quartier.
 		for(Joueur j : listeJoueur)
 		{
-			j.addCarteMain(pileQuartier.removeFirst());
-			j.addCarteMain(pileQuartier.removeFirst());
-			j.addCarteMain(pileQuartier.removeFirst());
-			j.addCarteMain(pileQuartier.removeFirst());
+			j.addCarteMain(pileBatiment.removeFirst());
+			j.addCarteMain(pileBatiment.removeFirst());
+			j.addCarteMain(pileBatiment.removeFirst());
+			j.addCarteMain(pileBatiment.removeFirst());
 		}
 		
 		// On choisit aléatoirement le joueur qui portera la couronne au premier tour.
@@ -355,7 +348,7 @@ public class Partie implements Iterable<Joueur> {
 		while(gagnant == null && iteJoueur.hasNext())
 		{
 			j = iteJoueur.next();
-			if(j.huitQuartier())
+			if(j.huitBatiments())
 			{
 				gagnant = j;
 			}

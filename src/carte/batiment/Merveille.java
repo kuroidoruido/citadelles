@@ -1,4 +1,4 @@
-package carte.quartier;
+package carte.batiment;
 
 import carte.Famille;
 
@@ -8,7 +8,7 @@ import carte.Famille;
  * @version 24 oct. 2012
  *
  */
-public class Merveille extends Quartier {
+public class Merveille extends Batiment {
 	
 	protected String texteCapacite;
 	protected int supplementPoint;

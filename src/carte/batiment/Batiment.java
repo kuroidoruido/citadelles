@@ -1,4 +1,4 @@
-package carte.quartier;
+package carte.batiment;
 
 import carte.Carte;
 import carte.Famille;
@@ -9,30 +9,30 @@ import carte.Famille;
  * @version 24 oct. 2012
  *
  */
-public class Quartier extends Carte implements Comparable<Quartier> {
+public abstract class Batiment extends Carte implements Comparable<Batiment> {
 	
 	protected int prix;
 
 	/**
-	 * @param nom le nom du quartier
+	 * @param nom le nom du Batiment
 	 * @param famille la famille du quatier
-	 * @param prix le prix de construction du quartier
+	 * @param prix le prix de construction du Batiment
 	 */
-	public Quartier(String nom, Famille famille, int prix) {
+	public Batiment(String nom, Famille famille, int prix) {
 		super(nom, famille);
 		this.prix = prix;
 	}
 	
 	/**
-	 * @param nom le nom du quartier
-	 * @param prix le prix de construction du quartier
+	 * @param nom le nom du Batiment
+	 * @param prix le prix de construction du Batiment
 	 */
-	public Quartier(String nom, int prix) {
+	public Batiment(String nom, int prix) {
 		this(nom, null, prix);
 	}
 
 	/**
-	 * @return le prix de construction du quartier
+	 * @return le prix de construction du Batiment
 	 */
 	public int getPrix() {
 		return prix;
@@ -42,15 +42,15 @@ public class Quartier extends Carte implements Comparable<Quartier> {
 		return prix;
 	}
 	
-	public int compareTo(Quartier q) {
+	public int compareTo(Batiment b) {
 		int retour = 0;
-		if(this.famille.compareTo(q.famille) == 0)
+		if(this.famille.compareTo(b.famille) == 0)
 		{
-			retour = this.prix - q.prix;
+			retour = this.prix - b.prix;
 		}
 		else
 		{
-			retour = this.famille.compareTo(q.famille);
+			retour = this.famille.compareTo(b.famille);
 		}
 		return retour;
 	}

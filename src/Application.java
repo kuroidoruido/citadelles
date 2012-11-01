@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import carte.Carte;
+import carte.batiment.Batiment;
 import carte.personnage.Empereur;
 import carte.personnage.Personnage;
-import carte.quartier.Quartier;
 
 import jeu.Joueur;
 import jeu.Partie;
@@ -35,8 +35,8 @@ public class Application {
 		
 		// Variables nécessaire au déroulement d'un tour de jeu
 		ArrayList<Personnage> listePersoChoisit;
-		Iterator<Quartier> iteQuartier;
-		Quartier quartierOk;
+		Iterator<Batiment> iteBatiment;
+		Batiment batimentOk;
 		do
 		{
 			// On sélectionne les personnages qui seront joués
@@ -81,7 +81,7 @@ public class Application {
 				}
 				else
 				{
-					partie.piocherQuartier(j, 2);
+					partie.piocherBatiment(j, 2);
 				}
 				
 				// Si la capacité de son personnage peut être appliqué maintenant, le joueur peut l'activer
@@ -94,19 +94,19 @@ public class Application {
 				// Un joueur peut construire un quartier
 				if(Math.random() < 0.5)
 				{
-					quartierOk = null;
-					iteQuartier = j.getMain().iterator();
-					while(iteQuartier.hasNext() && quartierOk == null)
+					batimentOk = null;
+					iteBatiment = j.getMain().iterator();
+					while(iteBatiment.hasNext() && batimentOk == null)
 					{
-						quartierOk = iteQuartier.next();
-						if(quartierOk.getPrix() < j.getOr())
+						batimentOk = iteBatiment.next();
+						if(batimentOk.getPrix() < j.getOr())
 						{
-							quartierOk = null;
+							batimentOk = null;
 						}
 					}
-					if(quartierOk != null)
+					if(batimentOk != null)
 					{
-						j.construireQuartier(quartierOk);
+						j.construireBatiment(batimentOk);
 					}
 				}
 				
@@ -125,7 +125,7 @@ public class Application {
 			System.out.println();
 		// Si aucun joueur n'a construit 8 quartiers, on refait un tour de jeu
 		}
-		while(partie.huitQuartiers());
+		while(partie.huitBatiments());
 		System.out.println(partie.getClassement().size());
 	}
 }

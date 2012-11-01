@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.TreeSet;
 
 import carte.Famille;
+import carte.batiment.Batiment;
+import carte.batiment.ComparatorBatimentCout;
+import carte.batiment.ComparatorBatimentFamille;
 import carte.personnage.Personnage;
-import carte.quartier.ComparatorQuartierCout;
-import carte.quartier.ComparatorQuartierFamille;
-import carte.quartier.Quartier;
 
 /**
  * @author Bauchet Cl�ment
@@ -19,10 +19,10 @@ import carte.quartier.Quartier;
 public class Joueur {
 	
 	private String nom;
-	private TreeSet<Quartier> main;
+	private TreeSet<Batiment> main;
 	private Personnage perso;
 	private int or;
-	private ArrayList<Quartier> quartierConstruit;
+	private ArrayList<Batiment> batimentConstruit;
 	private int droitConstruction;
 	
 	private Partie partie;
@@ -33,10 +33,10 @@ public class Joueur {
 	public Joueur(String nom, Partie partie) {
 		super();
 		this.nom = nom;
-		this.main = new TreeSet<Quartier>();
+		this.main = new TreeSet<Batiment>();
 		this.perso = null;
 		this.or = 2;
-		this.quartierConstruit = new ArrayList<Quartier>();
+		this.batimentConstruit = new ArrayList<Batiment>();
 		this.droitConstruction = 1;
 		this.partie = partie;
 	}
@@ -51,12 +51,12 @@ public class Joueur {
 	/**
 	 * @return la liste des quartiers que le joueur a en main
 	 */
-	public TreeSet<Quartier> getMain() {
+	public TreeSet<Batiment> getMain() {
 		return main;
 	}
 	
-	public void addCarteMain(Quartier q) {
-		main.add(q);
+	public void addCarteMain(Batiment b) {
+		main.add(b);
 	}
 	
 	/**
@@ -91,9 +91,9 @@ public class Joueur {
 		Famille famillePerso = perso.getFamille();
 		if(famillePerso != null)
 		{
-			for(Quartier q : quartierConstruit)
+			for(Batiment b : batimentConstruit)
 			{
-				if(q.getFamille() == famillePerso)
+				if(b.getFamille() == famillePerso)
 				{
 					or += 1;
 				}
@@ -112,18 +112,18 @@ public class Joueur {
 		}
 	}
 	
-	public void construireQuartier(Quartier q) throws QuartierPasDansLaMainException, QuartierDejaConstruiteException {
-		if(main.contains(q))
+	public void construireBatiment(Batiment b) throws BatimentPasDansLaMainException, BatimentDejaConstruiteException {
+		if(main.contains(b))
 		{
-			if(quartierConstruit.contains(q))
+			if(batimentConstruit.contains(b))
 			{
-				throw new QuartierDejaConstruiteException();
+				throw new BatimentDejaConstruiteException();
 			}
-			Joueur bailli = partie.isThereBailli();
+			Joueur bailli = partie.chercher("Bailli");
 			if(bailli != null)
 			{
 				try {
-					subOr(q.getPrix()+1);
+					subOr(b.getPrix()+1);
 					bailli.addOr(1);
 				} catch (PasAssezDOrException e) {
 					e.printStackTrace();
@@ -132,25 +132,25 @@ public class Joueur {
 			else
 			{
 				try {
-					subOr(q.getPrix());
+					subOr(b.getPrix());
 				} catch (PasAssezDOrException e) {
 					e.printStackTrace();
 				}
 			}
-			main.remove(q);
-			quartierConstruit.add(q);
+			main.remove(b);
+			batimentConstruit.add(b);
 		}
 		else
 		{
-			throw new QuartierPasDansLaMainException();
+			throw new BatimentPasDansLaMainException();
 		}
 	}
 	
 	/**
 	 * @return la liste des quartiers construits
 	 */
-	public ArrayList<Quartier> getQuartierConstruit() {
-		return quartierConstruit;
+	public ArrayList<Batiment> getBatimentConstruit() {
+		return batimentConstruit;
 	}
 	
 	/**
@@ -164,26 +164,26 @@ public class Joueur {
 		droitConstruction += supDroit;
 	}
 	
-	public boolean huitQuartier() {
-		return (quartierConstruit.size() >= 8);
+	public boolean huitBatiments() {
+		return (batimentConstruit.size() >= 8);
 	}
 	
 	public int calculerPoints() {
 		int points = 0;
-		ArrayList<Famille> listeFamilleQuartier = new ArrayList<Famille>();
-		for(Quartier q : quartierConstruit)
+		ArrayList<Famille> listeFamilleBatiment = new ArrayList<Famille>();
+		for(Batiment b : batimentConstruit)
 		{
-			if(!listeFamilleQuartier.contains(q.getFamille()))
+			if(!listeFamilleBatiment.contains(b.getFamille()))
 			{
-				listeFamilleQuartier.add(q.getFamille());
+				listeFamilleBatiment.add(b.getFamille());
 			}
-			points += q.calculPoints();
+			points += b.calculPoints();
 		}
-		if(listeFamilleQuartier.size() == Famille.getNbFamille())
+		if(listeFamilleBatiment.size() == Famille.getNbFamille())
 		{
 			points += 3;
 		}
-		if(huitQuartier())
+		if(huitBatiments())
 		{
 			points += 2;
 		}
@@ -194,11 +194,11 @@ public class Joueur {
 		return points;
 	}
 	
-	private int getNbQuartierConstruit(Famille f) {
+	private int getNbBatimentConstruit(Famille f) {
 		int nbQuartier = 0;
-		for(Quartier q : quartierConstruit)
+		for(Batiment b : batimentConstruit)
 		{
-			if(q.getFamille().equals(f))
+			if(b.getFamille().equals(f))
 			{
 				nbQuartier++;
 			}
@@ -206,24 +206,24 @@ public class Joueur {
 		return nbQuartier;
 	}
 	
-	public int getNbQuartierReligion() {
-		return getNbQuartierConstruit(Partie.religion);
+	public int getNbBatimentReligion() {
+		return getNbBatimentConstruit(Partie.religion);
 	}
 	
-	public int getNbQuartierNoblesse() {
-		return getNbQuartierConstruit(Partie.noblesse);
+	public int getNbBatimentNoblesse() {
+		return getNbBatimentConstruit(Partie.noblesse);
 	}
 	
-	public int getNbQuartierCommerce() {
-		return getNbQuartierConstruit(Partie.commerce);
+	public int getNbBatimentCommerce() {
+		return getNbBatimentConstruit(Partie.commerce);
 	}
 	
-	public int getNbQuartierMilitaire() {
-		return getNbQuartierConstruit(Partie.militaire);
+	public int getNbBatimentMilitaire() {
+		return getNbBatimentConstruit(Partie.militaire);
 	}
 	
-	public int getNbQuartierMerveille() {
-		return getNbQuartierConstruit(Partie.merveille);
+	public int getNbBatimentMerveille() {
+		return getNbBatimentConstruit(Partie.merveille);
 	}
 	
 	public boolean equals(Joueur j) {
@@ -232,23 +232,23 @@ public class Joueur {
 	
 	public String toString() {
 		String retour = nom+" :\nOr : "+or+"\nMain : ";
-		for(Quartier q : main)
+		for(Batiment b : main)
 		{
-			retour += q.toString()+" ";
+			retour += b.toString()+" ";
 		}
 		retour += "\nQuartier Construit : ";
-		for(Quartier q : quartierConstruit)
+		for(Batiment b : batimentConstruit)
 		{
-			retour += q.toString()+" ";
+			retour += b.toString()+" ";
 		}
 		return retour;
 	}
 	
-	public void trierQuartierConstruitFamille() {
-		Collections.sort(quartierConstruit, new ComparatorQuartierFamille());
+	public void trierBatimentConstruitFamille() {
+		Collections.sort(batimentConstruit, new ComparatorBatimentFamille());
 	}
 	
-	public void trierQuartierConstruitCout() {
-		Collections.sort(quartierConstruit, new ComparatorQuartierCout());
+	public void trierBatimentConstruitCout() {
+		Collections.sort(batimentConstruit, new ComparatorBatimentCout());
 	}
 }

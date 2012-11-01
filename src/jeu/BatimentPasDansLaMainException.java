@@ -7,19 +7,19 @@ package jeu;
  *
  */
 @SuppressWarnings("serial")
-public class QuartierPasDansLaMainException extends Exception {
+public class BatimentPasDansLaMainException extends Exception {
 
 	/**
 	 * 
 	 */
-	public QuartierPasDansLaMainException() {
+	public BatimentPasDansLaMainException() {
 		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
 	 * @param message
 	 */
-	public QuartierPasDansLaMainException(String message) {
+	public BatimentPasDansLaMainException(String message) {
 		super(message);
 		// TODO Stub du constructeur généré automatiquement
 	}
@@ -27,7 +27,7 @@ public class QuartierPasDansLaMainException extends Exception {
 	/**
 	 * @param cause
 	 */
-	public QuartierPasDansLaMainException(Throwable cause) {
+	public BatimentPasDansLaMainException(Throwable cause) {
 		super(cause);
 		// TODO Stub du constructeur généré automatiquement
 	}
@@ -36,7 +36,7 @@ public class QuartierPasDansLaMainException extends Exception {
 	 * @param message
 	 * @param cause
 	 */
-	public QuartierPasDansLaMainException(String message, Throwable cause) {
+	public BatimentPasDansLaMainException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Stub du constructeur généré automatiquement
 	}
