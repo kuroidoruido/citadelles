@@ -37,7 +37,7 @@ public class Joueur {
 		this.perso = null;
 		this.or = 2;
 		this.batimentConstruit = new ArrayList<Batiment>();
-		this.droitConstruction = 1;
+		this.droitConstruction = 0;
 		this.partie = partie;
 	}
 	
@@ -137,6 +137,7 @@ public class Joueur {
 					e.printStackTrace();
 				}
 			}
+			droitConstruction--;
 			main.remove(b);
 			batimentConstruit.add(b);
 		}
@@ -158,6 +159,10 @@ public class Joueur {
 	 */
 	public int getDroitConstruction() {
 		return droitConstruction;
+	}
+	
+	public void setDroitConstruction(int nbDroit) {
+		droitConstruction = nbDroit;
 	}
 	
 	public void addDroitConstruction(int supDroit) {

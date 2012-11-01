@@ -74,6 +74,8 @@ public class Application {
 			{
 				// On autorise le joueur utiliser son effet
 				droitEffet = 1;
+				// On donne le droit au joueur de construire
+				j.setDroitConstruction(1);
 				// le Joueur gagne une pièce d'or pour chaque quartier construit
 				j.addOrQuartier();
 				// Un joueur peu soit piocher 2 Quartier soit prendre 2 pièces
@@ -96,19 +98,22 @@ public class Application {
 				// Un joueur peut construire un quartier
 				if(j.getOr() > 0 && Math.random() < 0.5)
 				{
-					batimentOk = null;
-					iteBatiment = j.getMain().iterator();
-					while(iteBatiment.hasNext() && batimentOk == null)
+					while(j.getDroitConstruction() > 0)
 					{
-						batimentOk = iteBatiment.next();
-						if(batimentOk.getPrix() > j.getOr())
+						batimentOk = null;
+						iteBatiment = j.getMain().iterator();
+						while(iteBatiment.hasNext() && batimentOk == null)
 						{
-							batimentOk = null;
+							batimentOk = iteBatiment.next();
+							if(batimentOk.getPrix() > j.getOr())
+							{
+								batimentOk = null;
+							}
 						}
-					}
-					if(batimentOk != null)
-					{
-						j.construireBatiment(batimentOk);
+						if(batimentOk != null)
+						{
+							j.construireBatiment(batimentOk);
+						}
 					}
 				}
 				
