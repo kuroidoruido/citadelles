@@ -39,6 +39,7 @@ public class Application {
 		Batiment batimentOk;
 		do
 		{
+			System.out.println(" --- DEBUT TOUR "+partie.getNombreDeTour()+" --- ");
 			// On sélectionne les personnages qui seront joués
 			Collections.shuffle(partie.getPilePerso());
 			listePersoChoisit = new ArrayList<Personnage>();
@@ -100,7 +101,7 @@ public class Application {
 					while(iteBatiment.hasNext() && batimentOk == null)
 					{
 						batimentOk = iteBatiment.next();
-						if(batimentOk.getPrix() < j.getOr())
+						if(batimentOk.getPrix() > j.getOr())
 						{
 							batimentOk = null;
 						}
@@ -123,10 +124,16 @@ public class Application {
 				}
 				System.out.println(j+"\nPersonnage = "+j.getPerso()+"\n");
 			}
-			System.out.println();
+			System.out.println(" --- FIN TOUR "+partie.getNombreDeTour()+" --- \n");
+			partie.tourSuivant();
 		// Si aucun joueur n'a construit 8 quartiers, on refait un tour de jeu
 		}
 		while(!partie.huitBatiments());
-		System.out.println(partie.getClassement().size());
+		int i = 1;
+		for(Joueur j : partie.getClassement())
+		{
+			System.out.println(i+" "+j.getNom());
+			i++;
+		}
 	}
 }

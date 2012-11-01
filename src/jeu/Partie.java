@@ -79,6 +79,10 @@ public class Partie implements Iterable<Joueur> {
 		return listeJoueur.size();
 	}
 	
+	public void tourSuivant() {
+		nombreDeTour++;
+	}
+	
 	public Joueur chercher(Personnage p) {
 		Joueur tmp = null;
 		for(Joueur j : listeJoueur) {
