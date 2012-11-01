@@ -77,13 +77,13 @@ public class Application {
 				// le Joueur gagne une pièce d'or pour chaque quartier construit
 				j.addOrQuartier();
 				// Un joueur peu soit piocher 2 Quartier soit prendre 2 pièces
-				if(Math.random() < 0.5) // true or false aléatoirement
+				if(!partie.pileBatimentVide() && Math.random() < 0.5) // true or false aléatoirement
 				{
-					j.addOr(2);
+					partie.piocherBatiment(j, 2);
 				}
 				else
 				{
-					partie.piocherBatiment(j, 2);
+					j.addOr(2);
 				}
 				
 				// Si la capacité de son personnage peut être appliqué maintenant, le joueur peut l'activer
@@ -94,7 +94,7 @@ public class Application {
 				}
 				
 				// Un joueur peut construire un quartier
-				if(Math.random() < 0.5)
+				if(j.getOr() > 0 && Math.random() < 0.5)
 				{
 					batimentOk = null;
 					iteBatiment = j.getMain().iterator();

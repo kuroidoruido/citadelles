@@ -44,7 +44,7 @@ public class Partie implements Iterable<Joueur> {
 		super();
 		if(3 <= listeJoueur.size() && listeJoueur.size() <= 8)
 		{
-			this.nombreDeTour = 0;
+			this.nombreDeTour = 1;
 			this.listeJoueur = new LinkedList<Joueur>();
 			for(String j : listeJoueur)
 			{
@@ -389,5 +389,9 @@ public class Partie implements Iterable<Joueur> {
 		}
 		while(!tmpListeJoueur.isEmpty());
 		return classement;
+	}
+	
+	public boolean pileBatimentVide() {
+		return pileBatiment.isEmpty();
 	}
 }
