@@ -120,7 +120,7 @@ public class Application {
 					j.getPerso().capacite();
 					droitEffet--;
 				}
-				System.out.println(j+"\n");
+				System.out.println(j+"\nPersonnage = "+j.getPerso()+"\n");
 			}
 			System.out.println();
 		// Si aucun joueur n'a construit 8 quartiers, on refait un tour de jeu

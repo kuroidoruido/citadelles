@@ -48,4 +48,8 @@ public abstract class Personnage extends Carte implements Comparable<Personnage>
 	public int compareTo(Personnage p) {
 		return (this.ordre - p.ordre);
 	}
+	
+	public String toString() {
+		return nom;
+	}
 }
