@@ -375,7 +375,7 @@ public class Partie implements Iterable<Joueur> {
 			}
 			classement.add(tmpListeJoueur.remove(tmpListeJoueur.indexOf(tmp)));
 		}
-		while(tmpListeJoueur.isEmpty());
+		while(!tmpListeJoueur.isEmpty());
 		return classement;
 	}
 }

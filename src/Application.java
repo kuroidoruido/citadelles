@@ -125,7 +125,7 @@ public class Application {
 			System.out.println();
 		// Si aucun joueur n'a construit 8 quartiers, on refait un tour de jeu
 		}
-		while(partie.huitBatiments());
+		while(!partie.huitBatiments());
 		System.out.println(partie.getClassement().size());
 	}
 }
