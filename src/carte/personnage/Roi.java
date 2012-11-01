@@ -1,8 +1,8 @@
 package carte.personnage;
 
 import jeu.Partie;
-import carte.Carte;
 import carte.Famille;
+import carte.InstantEffet;
 
 /**
 * @author Bauchet Clément
@@ -13,7 +13,7 @@ import carte.Famille;
 public class Roi extends Personnage {
 
 	public Roi(Famille f, Partie partie) {
-		super("Roi", f, "Devient le premier joueur au tour suivant", 4, partie, Carte.effetPost);
+		super("Roi", f, "Devient le premier joueur au tour suivant", 4, partie, InstantEffet.effetPost);
 	}
 	
 	public void capacite() {

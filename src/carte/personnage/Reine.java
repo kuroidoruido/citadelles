@@ -1,8 +1,8 @@
 package carte.personnage;
 
 import jeu.Partie;
-import carte.Carte;
 import carte.Famille;
+import carte.InstantEffet;
 
 /**
 * @author Bauchet ClÃ©ment
@@ -13,7 +13,7 @@ import carte.Famille;
 public class Reine extends Personnage {
 
 	public Reine(Famille f, Partie partie) {
-		super("Reine", f, "Gagne 3 pièces d'or si assise à côté du Roi", 9, partie,Carte.effetPre);
+		super("Reine", f, "Gagne 3 pièces d'or si assise à côté du Roi", 9, partie,InstantEffet.effetPre);
 	}
 	
 	public void capacite() {

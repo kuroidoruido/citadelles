@@ -8,15 +8,9 @@ package carte;
  */
 public abstract class Carte {
 	
-	public static int sansEffet = -5;
-	public static int effetPre = -1;
-	public static int effetPreOuPost = 0;
-	public static int effetPost = +1;
-	public static int effetPassif = +5;
-	
 	protected String nom;
 	protected Famille famille;
-	protected int instantEffet;
+	protected InstantEffet instantEffet;
 	
 	/**
 	 * @param nom le nom de la carte
@@ -26,7 +20,7 @@ public abstract class Carte {
 	public Carte(String nom, Famille famille, int instantEffet) {
 		this.nom = nom;
 		this.famille = famille;
-		this.instantEffet = instantEffet;
+		this.instantEffet = new InstantEffet(instantEffet);
 	}
 	
 	/**
@@ -35,7 +29,7 @@ public abstract class Carte {
 	 * * @param instantEffet indique à quel moment du tour peut être utilisé l'effet : -1 avant la phase de construction, +1 après la phase de construction, 0 avant ou après
 	 */
 	public Carte(String nom, Famille famille) {
-		this(nom, famille, Carte.sansEffet);
+		this(nom, famille, InstantEffet.sansEffet);
 	}
 	
 	/**
@@ -52,8 +46,8 @@ public abstract class Carte {
 		return famille;
 	}
 	
-	public int getInstantEffet() {
+	public InstantEffet getInstantEffet() {
 		return instantEffet;
 	}
-
+	
 }

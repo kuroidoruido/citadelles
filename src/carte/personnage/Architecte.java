@@ -1,8 +1,8 @@
 package carte.personnage;
 
 import jeu.Partie;
-import carte.Carte;
 import carte.Famille;
+import carte.InstantEffet;
 
 /**
 * @author Bauchet Clément
@@ -13,7 +13,7 @@ import carte.Famille;
 public class Architecte extends Personnage {
 
 	public Architecte(Famille f, Partie partie) {
-		super("Architecte", f, "Peut bâtir jusqu'à 3 quartiers", 7, partie,Carte.effetPre);
+		super("Architecte", f, "Peut bâtir jusqu'à 3 quartiers", 7, partie,InstantEffet.effetPre);
 	}
 	
 	public void capacite() {

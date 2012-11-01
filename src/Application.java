@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import carte.Carte;
+import carte.InstantEffet;
 import carte.batiment.Batiment;
 import carte.personnage.Empereur;
 import carte.personnage.Personnage;
@@ -85,7 +85,7 @@ public class Application {
 				}
 				
 				// Si la capacité de son personnage peut être appliqué maintenant, le joueur peut l'activer
-				if(droitEffet > 0 && (j.getPerso().getInstantEffet() == Carte.effetPre || j.getPerso().getInstantEffet() == Carte.effetPreOuPost))
+				if(droitEffet > 0 && (j.getPerso().getInstantEffet().getValeur() == InstantEffet.effetPre || j.getPerso().getInstantEffet().getValeur() == InstantEffet.effetPreOuPost))
 				{
 					j.getPerso().capacite();
 					droitEffet--;
@@ -111,7 +111,7 @@ public class Application {
 				}
 				
 				// Si la capacité de son personnage peut être appliqué maintenant, le joueur peut l'activer
-				if(droitEffet > 0 && j.getPerso().getInstantEffet() == Carte.effetPost)
+				if(droitEffet > 0 && j.getPerso().getInstantEffet().getValeur() == InstantEffet.effetPost)
 				{	
 					if(j.getPerso().getNom() == "Empereur")
 					{

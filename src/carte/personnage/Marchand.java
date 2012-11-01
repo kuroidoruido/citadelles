@@ -1,8 +1,8 @@
 package carte.personnage;
 
 import jeu.Partie;
-import carte.Carte;
 import carte.Famille;
+import carte.InstantEffet;
 
 /**
 * @author Bauchet ClÃ©ment
@@ -13,7 +13,7 @@ import carte.Famille;
 public class Marchand extends Personnage {
 
 	public Marchand(Famille f, Partie partie) {
-		super("Marchand", f, "Gagne une pièce d'or de plus", 6, partie,Carte.effetPre);
+		super("Marchand", f, "Gagne une pièce d'or de plus", 6, partie,InstantEffet.effetPre);
 	}
 	
 	public void capacite() {

@@ -1,8 +1,8 @@
 package carte.personnage;
 
 import jeu.Partie;
-import carte.Carte;
 import carte.Famille;
+import carte.InstantEffet;
 
 /**
 * @author Bauchet Clément
@@ -13,7 +13,7 @@ import carte.Famille;
 public class Bailli extends Personnage {
 
 	public Bailli(Famille f, Partie partie) {
-		super("Bailli",f,"Tout joueur qui construit doit payer 1 pièce d'or au Bailli", 2, partie,Carte.effetPassif);
+		super("Bailli",f,"Tout joueur qui construit doit payer 1 pièce d'or au Bailli", 2, partie,InstantEffet.effetPassif);
 	}
 	
 	public void capacite() {

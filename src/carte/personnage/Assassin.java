@@ -1,8 +1,8 @@
 package carte.personnage;
 
 import jeu.Partie;
-import carte.Carte;
 import carte.Famille;
+import carte.InstantEffet;
 
 /**
 * @author Bauchet Clément
@@ -13,7 +13,7 @@ import carte.Famille;
 public class Assassin extends Personnage {
 
 	public Assassin(Famille f, Partie partie) {
-		super("Assassin",f,"Peut tuer un autre personnage", 1, partie,Carte.effetPost);
+		super("Assassin",f,"Peut tuer un autre personnage", 1, partie,InstantEffet.effetPost);
 	}
 	
 	public void capacite() {

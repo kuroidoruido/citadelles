@@ -1,8 +1,8 @@
 package carte.personnage;
 
 import jeu.Partie;
-import carte.Carte;
 import carte.Famille;
+import carte.InstantEffet;
 
 /**
 * @author Bauchet Clément
@@ -13,7 +13,7 @@ import carte.Famille;
 public class Magicien extends Personnage {
 
 	public Magicien(Famille f, Partie partie) {
-		super("Magicien", f, "Peut échanger toute sa main contre la main d'un autre joueur", 3, partie,Carte.effetPreOuPost);
+		super("Magicien", f, "Peut échanger toute sa main contre la main d'un autre joueur", 3, partie,InstantEffet.effetPreOuPost);
 	}
 	
 	public void capacite() {
