@@ -123,11 +123,19 @@ public class Partie implements Iterable<Joueur> {
 	/**
 	 * @param nbQuartier le nombre de quartier à piocher
 	 * @return les nbQuartier premiers quartiers de la pile de quartier
+	 * @throws PlusDeBatimentDansLaPileException 
 	 */
-	public void piocherBatiment(Joueur j, int nbBatiment) {
-		for(int i=0; i<nbBatiment; i++)
+	public void piocherBatiment(Joueur j, int nbBatiment) throws PlusDeBatimentDansLaPileException {
+		if(!pileBatiment.isEmpty())
 		{
-			j.addCarteMain(pileBatiment.removeFirst());
+			for(int i=0; i<nbBatiment; i++)
+			{
+				j.addCarteMain(pileBatiment.removeFirst());
+			}
+		}
+		else
+		{
+			throw new PlusDeBatimentDansLaPileException();
 		}
 	}
 	
@@ -365,7 +373,7 @@ public class Partie implements Iterable<Joueur> {
 		Joueur tmp;
 		do
 		{
-			tmp = tmpListeJoueur.get(1);
+			tmp = tmpListeJoueur.get(0);
 			for(Joueur j : tmpListeJoueur)
 			{
 				if(j.calculerPoints() > tmp.calculerPoints())

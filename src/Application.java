@@ -42,6 +42,7 @@ public class Application {
 			// On sélectionne les personnages qui seront joués
 			Collections.shuffle(partie.getPilePerso());
 			listePersoChoisit = new ArrayList<Personnage>();
+			partie.selectPerso(listePersoChoisit);
 			for(Personnage p : partie.getPilePerso())
 			{
 				if(!partie.ordreDejaSelectionne(p))
