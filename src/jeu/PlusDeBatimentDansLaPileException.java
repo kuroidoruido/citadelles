@@ -4,7 +4,8 @@
 package jeu;
 
 /**
- * @author anthony
+ * Cette exception survient lorsqu'un joueur essaie de piocher un bâtiment alors que la pile de bâtiments est vide.
+ * @author Anthony Pena
  *
  */
 @SuppressWarnings("serial")
@@ -14,7 +15,7 @@ public class PlusDeBatimentDansLaPileException extends Exception {
 	 * 
 	 */
 	public PlusDeBatimentDansLaPileException() {
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -22,7 +23,7 @@ public class PlusDeBatimentDansLaPileException extends Exception {
 	 */
 	public PlusDeBatimentDansLaPileException(String message) {
 		super(message);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -30,7 +31,7 @@ public class PlusDeBatimentDansLaPileException extends Exception {
 	 */
 	public PlusDeBatimentDansLaPileException(Throwable cause) {
 		super(cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -39,7 +40,7 @@ public class PlusDeBatimentDansLaPileException extends Exception {
 	 */
 	public PlusDeBatimentDansLaPileException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 }

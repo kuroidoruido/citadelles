@@ -4,7 +4,7 @@
 package carte.personnage;
 
 /**
- * @author anthony
+ * @author Anthony Pena
  *
  */
 public interface Selecteur {

@@ -4,7 +4,9 @@
 package jeu;
 
 /**
- * @author anthony
+ * Cette exception surviet lorsque le nombre de personnages sélectionnés n'est pas valide
+ * Le nombre de personnages sélectionnés doit être égal au nombre de joueurs plus un.
+ * @author Anthony Pena
  *
  */
 @SuppressWarnings("serial")

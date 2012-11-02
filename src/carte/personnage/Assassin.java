@@ -5,7 +5,8 @@ import carte.Famille;
 import carte.InstantEffet;
 
 /**
-* @author Bauchet ClÃ©ment
+ * Classe modélisant le personnage Assassin.
+* @author Bauchet Clément
 * @author Pena Anthony
 * @version 29 oct. 2012
 *
@@ -17,6 +18,6 @@ public class Assassin extends Personnage {
 	}
 	
 	public void capacite() {
-		// Si Ã©volution
+		// Si évolution
 	}
 }

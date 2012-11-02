@@ -4,7 +4,9 @@
 package jeu;
 
 /**
- * @author anthony
+ * Cette exception survient lorsque la liste de personnages sélectionnés ne contient ni Roi ni Empereur.
+ * Il faut au moins un des deux.
+ * @author Anthony Pena
  *
  */
 @SuppressWarnings("serial")

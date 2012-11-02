@@ -20,7 +20,7 @@ import jeu.PlusDeBatimentDansLaPileException;
 import jeu.PlusieursPersonnageDuMemeOrdreException;
 
 /**
-* @author Bauchet ClÃ©ment
+* @author Bauchet Clément
 * @author Pena Anthony
 * @version 29 oct. 2012
 *
@@ -38,29 +38,29 @@ public class Application {
 		listeJoueur.add("Joueur 2");
 		listeJoueur.add("Joueur 3");
 		
-		// On crÃ©ait une partie initialisÃ©e
+		// On crée une partie initialisée
 		Partie partie = null;
 		try {
 			partie = new Partie(listeJoueur);
 		} catch (NombreDeJoueurIncorrectException e) {
-			System.out.println("Le nombre de joueur indiquÃ© est incorrect !");
+			System.out.println("Le nombre de joueur indiqué est incorrect !");
 			System.exit(0);
 		}
 		
-		// Variables nÃ©cessaire au dÃ©roulement d'un tour de jeu
-		ArrayList<Personnage> listePersoChoisit;
-		Iterator<Batiment> iteBatiment;
+		// Variables nécessaire au déroulement d'un tour de jeu
+		ArrayList<Personnage> listePersoChoisit; //Liste des personnages choisis par les joueurs
+		Iterator<Batiment> iteBatiment; //Un itérateur pour parcourir la main des joueurs
 		Batiment batimentOk;
 		do
 		{
 			System.out.println(" --- DEBUT TOUR "+partie.getNombreDeTour()+" --- ");
-			// On sÃ©lectionne les personnages qui seront jouÃ©s
-			Collections.shuffle(partie.getPilePerso());
+			// On sélectionne les personnages qui seront joués
+			Collections.shuffle(partie.getPilePerso()); //On mélange la pile de personnages à piocher
 			listePersoChoisit = new ArrayList<Personnage>();
 			partie.selectPerso(listePersoChoisit);
-			for(Personnage p : partie.getPilePerso())
+			for(Personnage p : partie.getPilePerso()) //On parcourt chaque personnage de la pile
 			{
-				if(!partie.ordreDejaSelectionne(p))
+				if(!partie.ordreDejaSelectionne(p)) //On s'assure de ne pas piocher 2 personnages de même ordre
 				{
 					if(p.getOrdre() < 9)
 					{
@@ -73,21 +73,21 @@ public class Application {
 					partie.selectPerso(listePersoChoisit);
 				}
 			}
-			// On vÃ©rifie que toutes les conditions sont respectÃ©es
+			// On vérifie que toutes les conditions sont respectées
 			try {
 				partie.verifierPersoSelectionne();
 			} catch (NombreDePersonnageSelectionneIncorrectException e) {
-				System.out.println("Le nombre de personnage sÃ©lectionnÃ© est incorrect !");
+				System.out.println("Le nombre de personnage sélectionné est incorrect !");
 				System.exit(0);
 			} catch (PlusieursPersonnageDuMemeOrdreException e) {
-				System.out.println("Plusieurs personnage du mÃªme ordre ont Ã©tÃ© sÃ©lectionnÃ©s !");
+				System.out.println("Plusieurs personnage du même ordre ont été sélectionnés !");
 				System.exit(0);
 			} catch (PasDeRoiOuDEmpereurException e) {
-				System.out.println("Il faut sÃ©lectionnÃ© le Roi ou l'Empereur !");
+				System.out.println("Il faut sélectionné le Roi ou l'Empereur !");
 				System.exit(0);
 			}
 			
-			// On attribut un personnage Ã  chaque joueur
+			// On attribue un personnage à chaque joueur
 			Collections.shuffle(partie.getListePersoJoue());
 			for(Joueur j : partie.getListeJoueur())
 			{
@@ -101,15 +101,15 @@ public class Application {
 				droitEffet = 1;
 				// On donne le droit au joueur de construire
 				j.setDroitConstruction(1);
-				// le Joueur gagne une piÃ¨ce d'or pour chaque quartier construit
-				j.addOrQuartier();
-				// Un joueur peu soit piocher 2 Quartier soit prendre 2 piÃ¨ces
-				if(!partie.pileBatimentVide() && Math.random() < 0.5) // true or false alÃ©atoirement
+				// le Joueur gagne une pièce d'or pour chaque quartier de sa famille construit
+				j.addOrBatiment();
+				// Un joueur peut soit piocher 2 bâtiments soit prendre 2 pièces
+				if(!partie.pileBatimentVide() && Math.random() < 0.5) //Ici, le choix est fait aléatoirement
 				{
 					try {
 						partie.piocherBatiment(j, 2);
 					} catch (PlusDeBatimentDansLaPileException e) {
-						System.out.println("Impossible de piocher la pile de Batiment est vide.");
+						System.out.println("Impossible de piocher : la pile de Batiment est vide.");
 					}
 				}
 				else
@@ -117,18 +117,18 @@ public class Application {
 					j.addOr(2);
 				}
 				
-				// Si la capacitÃ© de son personnage peut Ãªtre appliquÃ© maintenant, le joueur peut l'activer
+				// Si la capacité de son personnage peut être appliqué maintenant, le joueur peut l'activer
 				if(droitEffet > 0 && (j.getPerso().getInstantEffet().getValeur() == InstantEffet.effetPre || j.getPerso().getInstantEffet().getValeur() == InstantEffet.effetPreOuPost))
 				{
 					try {
 						j.getPerso().capacite();
 					} catch (Exception e) {
-						System.out.println("Des conditions n'ont pas Ã©tÃ© respectÃ© pour activer l'effet d'un personnage !");
+						System.out.println("Des conditions n'ont pas été respecté pour activer l'effet d'un personnage !");
 					}
 					droitEffet--;
 				}
 				
-				// Un joueur peut construire un quartier
+				// Un joueur peut construire un bâtiment
 				if(j.getOr() > 0 && Math.random() < 0.5)
 				{
 					while(j.getDroitConstruction() > 0)
@@ -138,7 +138,7 @@ public class Application {
 						while(iteBatiment.hasNext() && batimentOk == null)
 						{
 							batimentOk = iteBatiment.next();
-							if(batimentOk.getPrix() > j.getOr())
+							if(batimentOk.getPrix() > j.getOr()) //Le joueur doit avoir assez d'or pour construire
 							{
 								batimentOk = null;
 							}
@@ -148,22 +148,22 @@ public class Application {
 							try {
 								j.construireBatiment(batimentOk);
 							} catch (BatimentPasDansLaMainException e) {
-								System.out.println("Vous ne pouvez pas construire un batiment qui n'est pas dans votre main !");
+								System.out.println("Vous ne pouvez pas construire un bâtiment qui n'est pas dans votre main !");
 							} catch (BatimentDejaConstruiteException e) {
-								System.out.println("Le batiment sÃ©lectionnÃ© a dÃ©jÃ  Ã©tÃ© construit !");
+								System.out.println("Le batiment sélectionné a déjà été construit !");
 							} catch (PasAssezDOrException e) {
-								System.out.println("Vous ne possÃ©dez pas assez d'or pour construire ce batiment !");
+								System.out.println("Vous ne possédez pas assez d'or pour construire ce bâtiment !");
 							}
 						}
 						else
 						{
-							// Si aucun batiment de la main ne peut Ãªtre construit on sort de la boucle
+							// Si aucun batiment de la main ne peut être construit on sort de la boucle
 							j.setDroitConstruction(0);
 						}
 					}
 				}
 				
-				// Si la capacitÃ© de son personnage peut Ãªtre appliquÃ© maintenant, le joueur peut l'activer
+				// Si la capacité de son personnage peut être appliqué maintenant, le joueur peut l'activer
 				if(droitEffet > 0 && j.getPerso().getInstantEffet().getValeur() == InstantEffet.effetPost)
 				{	
 					if(j.getPerso().getNom() == "Empereur")
@@ -173,7 +173,7 @@ public class Application {
 					try {
 						j.getPerso().capacite();
 					} catch (Exception e) {
-						System.out.println("Des conditions n'ont pas Ã©tÃ© respectÃ© pour activer l'effet d'un personnage !");
+						System.out.println("Des conditions n'ont pas été respectées pour activer l'effet d'un personnage !");
 					}
 					droitEffet--;
 				}
@@ -181,11 +181,11 @@ public class Application {
 			}
 			System.out.println(" --- FIN TOUR "+partie.getNombreDeTour()+" --- \n");
 			partie.tourSuivant();
-		// Si aucun joueur n'a construit 8 quartiers, on refait un tour de jeu
+		// Si aucun joueur n'a construit 8 bâtiments, on refait un tour de jeu
 		}
 		while(!partie.huitBatiments());
 		int i = 1;
-		for(Joueur j : partie.getClassement())
+		for(Joueur j : partie.getClassement()) //A la fin de la partie, on affiche le classsement des joueurs.
 		{
 			System.out.println(i+" "+j.getNom()+" ("+j.calculerPoints()+"pts)");
 			i++;

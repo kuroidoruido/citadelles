@@ -14,9 +14,10 @@ import carte.batiment.Quartier;
 import carte.personnage.*;
 
 /**
- * @author Bauchet ClÃ©ment
+ * Classe modélisant le déroulement complet d'une partie de Citadelles
+ * @author Bauchet Clément
  * @author Pena Anthony
- * @version 24 oct. 2012
+ * @version 1 nov. 2012
  *
  */
 public class Partie implements Iterable<Joueur> {
@@ -29,14 +30,15 @@ public class Partie implements Iterable<Joueur> {
 	private ArrayList<Personnage> pilePerso;
 	private ArrayList<Personnage> listePersoJoue;
 	
-	// CrÃ©ation des familles de carte
+	// Création des familles de carte
 	public static Famille religion = new Famille("Religion", Color.blue);
 	public static Famille noblesse = new Famille("Noblesse", Color.yellow);
 	public static Famille commerce = new Famille("Commerce", Color.green);
 	public static Famille militaire = new Famille("Militaire", Color.red);
 	public static Famille merveille = new Famille("Merveille", Color.magenta);
 	
-	/** Constructeur de Partie, initialise la partie en instanciant les listes et en distribuant les cartes.
+	/** 
+	 * Constructeur de Partie, initialise la partie en instanciant les listes et en distribuant les cartes.
 	 * @throws NombreDeJoueurIncorrectException 
 	 * 
 	 */
@@ -57,32 +59,46 @@ public class Partie implements Iterable<Joueur> {
 		}
 		else
 		{
-			throw new NombreDeJoueurIncorrectException("Erreur sur le nombre de joueur ! Le nombre de joueur doit Ãªtre compris entre 3 et 8.");
+			throw new NombreDeJoueurIncorrectException("Erreur sur le nombre de joueurs ! Le nombre de joueurs doit être compris entre 3 et 8.");
 		}
 	}
 
 	/**
-	 * @return le nombre de tour Ã©coulÃ©
+	 * Méthode permettand de connaître le nombre de tours passés depuis le début de la partie
+	 * @return le nombre de tours écoulés
 	 */
 	public int getNombreDeTour() {
 		return nombreDeTour;
 	}
 	
 	/**
+	 * Méthode permettant de récupérer la liste des joueurs.
 	 * @return la listeJoueur
 	 */
 	public LinkedList<Joueur> getListeJoueur() {
 		return listeJoueur;
 	}
 	
+	/**
+	 * Méthode permettant de récupérer le nombre de joueurs de la partie.
+	 * @return le nombre de joueurs dans la partie
+	 */
 	public int getNbJoueur() {
 		return listeJoueur.size();
 	}
 	
+	/**
+	 * Méthode permettant d'incrémenter le compteur de tours
+	 */
 	public void tourSuivant() {
 		nombreDeTour++;
 	}
 	
+	/**
+	 * Méthode permettant de rechercher le joueur jouant le personnage spécifié
+	 * @param p le personnage dont on veut connaître le joueur associé
+	 * @return le joueur jouant le personnage recherché si ce dernier est trouvé, null sinon
+	 */
 	public Joueur chercher(Personnage p) {
 		Joueur tmp = null;
 		for(Joueur j : listeJoueur) {
@@ -93,6 +109,11 @@ public class Partie implements Iterable<Joueur> {
 		return tmp;
 	}
 	
+	/**
+	 * Méthode permettant de rechercher le joueur jouant le personnage spécifié par son nom.
+	 * @param p le nom du personnage dont on veut connaître le joueur associé
+	 * @return le joueur jouant le personnage recherché si ce dernier est trouvé, null sinon
+	 */
 	public Joueur chercher(String p) {
 		Joueur tmp = null;
 		for(Joueur j : listeJoueur) {
@@ -104,13 +125,15 @@ public class Partie implements Iterable<Joueur> {
 	}
 	
 	/**
-	 * @return le joueur qui dÃ©tient la couronne
+	 * Méthode permettant de connaître le joueur possédant la couronne
+	 * @return le joueur qui détient la couronne
 	 */
 	public Joueur getCouronne() {
 		return couronne;
 	}
 
 	/**
+	 * Méthode permettant de donner la couronne à un joueur
 	 * @param couronne le joueur qui obtient la couronne
 	 */
 	public void setCouronne(Joueur couronne) {
@@ -118,33 +141,35 @@ public class Partie implements Iterable<Joueur> {
 	}
 	
 	/**
-	 * @return le pilePerso
+	 * Méthode permettant de récupérer la pile de personnages
+	 * @return la pile de personnages
 	 */
 	public ArrayList<Personnage> getPilePerso() {
 		return pilePerso;
 	}
 
 	/**
-	 * @param nbQuartier le nombre de quartier Ã  piocher
-	 * @return les nbQuartier premiers quartiers de la pile de quartier
-	 * @throws PlusDeBatimentDansLaPileException 
+	 * Méthode permettant de piocher des cartes bâtiment
+	 * @param nbbâtiment le nombre de bâtiments à piocher
+	 * @return les nbBatiment premiers bâtiments de la pile de bâtiment
 	 */
 	public void piocherBatiment(Joueur j, int nbBatiment) throws PlusDeBatimentDansLaPileException {
-		if(!pileBatiment.isEmpty())
+		if(!pileBatiment.isEmpty()) //On peut piocher tant qu'il reste des cartes dans la pile
 		{
 			for(int i=0; i<nbBatiment; i++)
 			{
 				j.addCarteMain(pileBatiment.removeFirst());
 			}
 		}
-		else
+		else //Si la pile est vide, on lève une exception
 		{
 			throw new PlusDeBatimentDansLaPileException();
 		}
 	}
 	
 	/**
-	 * @return true si au moins un des joueurs Ã  construit 8 quartiers
+	 * Méthode permettant de savoir si un des joueurs a construit 8 bâtiments ou plus, ce qui permettra de mettre fin à la partie.
+	 * @return true si au moins un des joueurs à construit 8 bâtiments
 	 */
 	public boolean huitBatiments() {
 		boolean retour = false;
@@ -155,12 +180,12 @@ public class Partie implements Iterable<Joueur> {
 		return retour;
 	}
 	
-	/** MÃ©thode permettant d'initialiser une partie
-	 * 
+	/** 
+	 * Méthode permettant d'initialiser une partie, en créant tous les quartiers et personnages utilisables par les joueurs.
 	 */
 	private void initialiser() {
 		
-		// CrÃ©ation et ajout Ã  la pile de chacune des cartes Quartier et Merveille
+		// Création et ajout à la pile de chacune des cartes Quartier et Merveille
 		pileBatiment.clear();
 		pileBatiment.add(new Quartier("Temple",religion,1));
 		pileBatiment.add(new Quartier("Temple",religion,1));
@@ -169,21 +194,21 @@ public class Partie implements Iterable<Joueur> {
 		pileBatiment.add(new Quartier("Eglise",religion,2));
 		pileBatiment.add(new Quartier("Eglise",religion,2));
 		pileBatiment.add(new Quartier("Eglise",religion,2));
-		pileBatiment.add(new Quartier("MonastÃ¨re",religion,3));
-		pileBatiment.add(new Quartier("MonastÃ¨re",religion,3));
-		pileBatiment.add(new Quartier("MonastÃ¨re",religion,3));
-		pileBatiment.add(new Quartier("CathÃ©drale",religion,5));
-		pileBatiment.add(new Quartier("CathÃ©drale",religion,5));
+		pileBatiment.add(new Quartier("Monastère",religion,3));
+		pileBatiment.add(new Quartier("Monastère",religion,3));
+		pileBatiment.add(new Quartier("Monastère",religion,3));
+		pileBatiment.add(new Quartier("Cathédrale",religion,5));
+		pileBatiment.add(new Quartier("Cathédrale",religion,5));
 
 		pileBatiment.add(new Quartier("Manoir",noblesse,3));
 		pileBatiment.add(new Quartier("Manoir",noblesse,3));
 		pileBatiment.add(new Quartier("Manoir",noblesse,3));
 		pileBatiment.add(new Quartier("Manoir",noblesse,3));
 		pileBatiment.add(new Quartier("Manoir",noblesse,3));
-		pileBatiment.add(new Quartier("ChÃ¢teau",noblesse,4));
-		pileBatiment.add(new Quartier("ChÃ¢teau",noblesse,4));
-		pileBatiment.add(new Quartier("ChÃ¢teau",noblesse,4));
-		pileBatiment.add(new Quartier("ChÃ¢teau",noblesse,4));
+		pileBatiment.add(new Quartier("Château",noblesse,4));
+		pileBatiment.add(new Quartier("Château",noblesse,4));
+		pileBatiment.add(new Quartier("Château",noblesse,4));
+		pileBatiment.add(new Quartier("Château",noblesse,4));
 		pileBatiment.add(new Quartier("Palais",noblesse,5));
 		pileBatiment.add(new Quartier("Palais",noblesse,5));
 
@@ -192,21 +217,21 @@ public class Partie implements Iterable<Joueur> {
 		pileBatiment.add(new Quartier("Taverne",commerce,1));
 		pileBatiment.add(new Quartier("Taverne",commerce,1));
 		pileBatiment.add(new Quartier("Taverne",commerce,1));
-		pileBatiment.add(new Quartier("Ã‰choppe",commerce,2));
-		pileBatiment.add(new Quartier("Ã‰choppe",commerce,2));
-		pileBatiment.add(new Quartier("Ã‰choppe",commerce,2));
-		pileBatiment.add(new Quartier("MarchÃ©",commerce,2));
-		pileBatiment.add(new Quartier("MarchÃ©",commerce,2));
-		pileBatiment.add(new Quartier("MarchÃ©",commerce,2));
-		pileBatiment.add(new Quartier("MarchÃ©",commerce,2));
+		pileBatiment.add(new Quartier("É‰choppe",commerce,2));
+		pileBatiment.add(new Quartier("É‰choppe",commerce,2));
+		pileBatiment.add(new Quartier("É‰choppe",commerce,2));
+		pileBatiment.add(new Quartier("Marché",commerce,2));
+		pileBatiment.add(new Quartier("Marché",commerce,2));
+		pileBatiment.add(new Quartier("Marché",commerce,2));
+		pileBatiment.add(new Quartier("Marché",commerce,2));
 		pileBatiment.add(new Quartier("Comptoir",commerce,3));
 		pileBatiment.add(new Quartier("Comptoir",commerce,3));
 		pileBatiment.add(new Quartier("Comptoir",commerce,3));
 		pileBatiment.add(new Quartier("Port",commerce,4));
 		pileBatiment.add(new Quartier("Port",commerce,4));
 		pileBatiment.add(new Quartier("Port",commerce,4));
-		pileBatiment.add(new Quartier("HÃ´tel de ville",commerce,5));
-		pileBatiment.add(new Quartier("HÃ´tel de ville",commerce,5));
+		pileBatiment.add(new Quartier("Hôtel de ville",commerce,5));
+		pileBatiment.add(new Quartier("Hôtel de ville",commerce,5));
 
 		pileBatiment.add(new Quartier("Tour de guet",militaire,1));
 		pileBatiment.add(new Quartier("Tour de guet",militaire,1));
@@ -220,21 +245,21 @@ public class Partie implements Iterable<Joueur> {
 		pileBatiment.add(new Quartier("Forteresse",militaire,5));
 		pileBatiment.add(new Quartier("Forteresse",militaire,5));
 
-		pileBatiment.add(new Merveille("Cour des miracles",merveille,2,"Pour le dÃ©compte final des points, la cour des miracles est considÃ©rÃ©e comme un quartier de la couleur de votre choix. Vous ne pouvez pas utilisez cette capacitÃ© si vous avez construit la cour des miracles au dernier tour de jeu.",0));
-		pileBatiment.add(new Merveille("Donjon",merveille,3,"Le Donjon ne peut pas Ãªtre dÃ©truit par le CondottiÃ¨re.",0));
-		pileBatiment.add(new Merveille("Laboratoire",merveille,5,"Une fois par tour, vous pouvez vous dÃ©fausser d'une carte quartier de votre main et recevoir une piÃ¨ce d'or en contrepartie",0));
-		pileBatiment.add(new Merveille("Manufacture",merveille,5,"Une fois par tour, vous pouvez payer trois piÃ¨ces d'or pour piocher trois cartes.",0));
-		pileBatiment.add(new Merveille("Observatoire",merveille,3,"Si vous choisissez de piocher des cartes au dÃ©but de votre tour, vous en piochez trois, en choisissez une et dÃ©faussez les deux autres.",0));
-		pileBatiment.add(new Merveille("CimetiÃ¨re",merveille,5,"Lorsque le CondottiÃ¨re dÃ©truit un quartier, vous pouvez payer une piÃ¨ce d'or pour le reprendre dans votre main. Vous ne pouvez pas faire cela si vous Ãªtes vous-mÃªme Condottiere.",0));
-		pileBatiment.add(new Merveille("BibliothÃ¨que",merveille,6,"Si vous choisissez de piocher des cartes au dÃ©but de votre tour, vous en piochez deux et les conservez toutes les deux.",0));
-		pileBatiment.add(new Merveille("Ã‰cole de Magie",merveille,6,"Pour la perception des revenus, l'Ã©cole de magie est considÃ©rÃ©e comme un quartier de la couleur de votre choix, elle vous rapporte donc si vous Ãªtes, Roi, EvÃªque, Marchand ou Condottiere",0));
-		pileBatiment.add(new Merveille("UniversitÃ©",merveille,6,"Cette rÃ©alisation de prestige (nul n'a jamais compris Ã  quoi pouvait bien servir une universitÃ©) coÃ»te six piÃ¨ces d'or Ã  bÃ¢tir mais vaut huit points dans le dÃ©compte de fin de partie.",2));
-		pileBatiment.add(new Merveille("Dracoport",merveille,6,"Cette rÃ©alisation de prestige (on n'a pas vu de dragon dans le Royaume depuis bientÃ´t mille ans) coÃ»te six piÃ¨ces d'or Ã  bÃ¢tir mais vaut huit points dans le dÃ©compte de fin de partie.",2));
+		pileBatiment.add(new Merveille("Cour des miracles",merveille,2,"Pour le décompte final des points, la cour des miracles est considérée comme un quartier de la couleur de votre choix. Vous ne pouvez pas utilisez cette capacité si vous avez construit la cour des miracles au dernier tour de jeu.",0));
+		pileBatiment.add(new Merveille("Donjon",merveille,3,"Le Donjon ne peut pas être détruit par le Condottière.",0));
+		pileBatiment.add(new Merveille("Laboratoire",merveille,5,"Une fois par tour, vous pouvez vous défausser d'une carte quartier de votre main et recevoir une pièce d'or en contrepartie",0));
+		pileBatiment.add(new Merveille("Manufacture",merveille,5,"Une fois par tour, vous pouvez payer trois pièces d'or pour piocher trois cartes.",0));
+		pileBatiment.add(new Merveille("Observatoire",merveille,3,"Si vous choisissez de piocher des cartes au début de votre tour, vous en piochez trois, en choisissez une et défaussez les deux autres.",0));
+		pileBatiment.add(new Merveille("Cimetière",merveille,5,"Lorsque le Condottière détruit un quartier, vous pouvez payer une pièce d'or pour le reprendre dans votre main. Vous ne pouvez pas faire cela si vous êtes vous-même Condottiere.",0));
+		pileBatiment.add(new Merveille("Bibliothèque",merveille,6,"Si vous choisissez de piocher des cartes au début de votre tour, vous en piochez deux et les conservez toutes les deux.",0));
+		pileBatiment.add(new Merveille("É‰cole de Magie",merveille,6,"Pour la perception des revenus, l'école de magie est considérée comme un quartier de la couleur de votre choix, elle vous rapporte donc si vous êtes, Roi, Evêque, Marchand ou Condottiere",0));
+		pileBatiment.add(new Merveille("Université",merveille,6,"Cette réalisation de prestige (nul n'a jamais compris à quoi pouvait bien servir une université) coûte six pièces d'or à bâtir mais vaut huit points dans le décompte de fin de partie.",2));
+		pileBatiment.add(new Merveille("Dracoport",merveille,6,"Cette réalisation de prestige (on n'a pas vu de dragon dans le Royaume depuis bientôt mille ans) coûte six pièces d'or à bâtir mais vaut huit points dans le décompte de fin de partie.",2));
 
-		// MÃ©lange alÃ©atoire de la pile de Quartier
+		// Mélange aléatoire de la pile de Quartier
 		Collections.shuffle((List<Batiment>)(pileBatiment));
 
-		// CrÃ©ation et ajout des cartes Personnage Ã  la liste des Personnages
+		// Création et ajout des cartes Personnage à la liste des Personnages
 		pilePerso.clear();
 		pilePerso.add(new Assassin(null,this));
 		pilePerso.add(new Bailli(null,this));
@@ -247,7 +272,7 @@ public class Partie implements Iterable<Joueur> {
 		pilePerso.add(new Condottiere(militaire,this));
 		pilePerso.add(new Reine(noblesse,this));
 
-		// On distribue Ã  chaque joueur 4 cartes Quartier.
+		// On distribue à chaque joueur 4 cartes Quartier.
 		for(Joueur j : listeJoueur)
 		{
 			j.addCarteMain(pileBatiment.removeFirst());
@@ -256,19 +281,20 @@ public class Partie implements Iterable<Joueur> {
 			j.addCarteMain(pileBatiment.removeFirst());
 		}
 		
-		// On choisit alÃ©atoirement le joueur qui portera la couronne au premier tour.
+		// On choisit aléatoirement le joueur qui portera la couronne au premier tour.
 		setCouronne(listeJoueur.get((new Double(Math.random()*listeJoueur.size()).intValue())));
 		couronneEnPremier();
 	}
 	
 	/**
-	 * @return un Iterator<Joueur> qui permet de parcourir les joueurs selon l'ordre de leurs Personnage.
+	 * @return un Iterator<Joueur> qui permet de parcourir les joueurs selon l'ordre de leurs Personnages.
 	 */
 	public Iterator<Joueur> iterator() {
 		return new JoueurOrdrePersoIterator(this);
 	}
 	
-	/** positionne le premier joueur au porteur de la couronne
+	/** 
+	 * Positionne le premier joueur au porteur de la couronne
 	 * 
 	 */
 	public void couronneEnPremier() {
@@ -278,27 +304,42 @@ public class Partie implements Iterable<Joueur> {
 		}
 	}
 	
+	/**
+	 * Méthode permettant de définir quels personnages seront joués pendant le tour.
+	 * @param perso la liste des personnages à jouer
+	 */
 	public void selectPerso(ArrayList<Personnage> perso) {
 		listePersoJoue = perso;
 	}
 	
+	/**
+	 * Méthode permettant de récupérer la liste des personnages joués du tour actuel.
+	 * @return la liste des personnages joués du tour
+	 */
 	public ArrayList<Personnage> getListePersoJoue() {
 		return listePersoJoue;
 	}
 	
+	/**
+	 * Méthode permettant de vérifier si la sélection des personnages est valide.
+	 * @return true si le nombre de cartes est égal au nombre de joueurs plus un, ET s'il n'y a pas plusieurs personnages de même ordre de passage, ET s'il y a un Roi ou un Empereur.
+	 * @throws NombreDePersonnageSelectionneIncorrectException
+	 * @throws PlusieursPersonnageDuMemeOrdreException
+	 * @throws PasDeRoiOuDEmpereurException
+	 */
 	public boolean verifierPersoSelectionne() throws NombreDePersonnageSelectionneIncorrectException, PlusieursPersonnageDuMemeOrdreException, PasDeRoiOuDEmpereurException {
 		boolean retour = true;
 		
-		// On vÃ©rifie le nombre de carte.
+		// On vérifie le nombre de carte.
 		if((getNbJoueur() < 7 && listePersoJoue.size() != 8) || (getNbJoueur() == 8 && listePersoJoue.size() != 9) || (listePersoJoue.size() > 9))
 		{
-			throw new NombreDePersonnageSelectionneIncorrectException("nombre de joueur = "+getNbJoueur()+" nombre de Personnage sÃ©lectionnÃ©s = "+listePersoJoue.size());
+			throw new NombreDePersonnageSelectionneIncorrectException("nombre de joueur = "+getNbJoueur()+" nombre de Personnage sélectionnés = "+listePersoJoue.size());
 		}
 		
-		// On vÃ©rifie qu'un seul Personnage de chaque ordre soit dans les cartes sÃ©lectionnÃ©es
-		// Sauf pour l'ordre 9 qui peut Ãªtre Ã  zÃ©ro
+		// On vérifie qu'un seul Personnage de chaque ordre soit dans les cartes sélectionnées
+		// Sauf pour l'ordre 9 qui peut être à zéro
 		// ET
-		//On vÃ©rifie qu'il y a un Roi ou un Empereur
+		//On vérifie qu'il y a un Roi ou un Empereur
 		Integer[] ordre = new Integer[9];
 		boolean roi = false;
 		for(int i=0;i<9;i++)
@@ -309,7 +350,7 @@ public class Partie implements Iterable<Joueur> {
 		{
 			ordre[p.getOrdre()-1]++;
 			
-			if(p.getNom() == "Roi" || p.getNom() == "Empereur")
+			if(p.getNom() == "Roi" || p.getNom() == "Empereur") //On vérifie s'il y a un Roi OU un Empereur
 			{
 				roi = true;
 			}
@@ -319,7 +360,7 @@ public class Partie implements Iterable<Joueur> {
 		while(retour && i<9)
 		{
 			ordreString += ordre[i]+" ";
-			if((i < 7 & ordre[i] != 1) || (i == 8 && ordre[i] > 1))
+			if((i < 7 & ordre[i] != 1) || (i == 8 && ordre[i] > 1)) //On vérifie que chaque personnage a un ordre unique
 			{
 				retour = false;
 			}
@@ -338,6 +379,11 @@ public class Partie implements Iterable<Joueur> {
 		return retour;
 	}
 	
+	/**
+	 * Méthode permettant de savoir si un l'ordre d'un personnage a déjà été sélectionné.
+	 * @param perso le personnage dont on vérifie l'ordre
+	 * @return true si un personnage de même ordre est déjà sélectionné
+	 */
 	public boolean ordreDejaSelectionne(Personnage perso) {
 		boolean retour = false;
 		if(!listePersoJoue.isEmpty())
@@ -353,6 +399,9 @@ public class Partie implements Iterable<Joueur> {
 		return retour;
 	}
 	
+	/**
+	 * Méthode permettant de connaître le gagnant de la partie.
+	 */
 	public void trouverGagnant() {
 		gagnant = null;
 		Iterator<Joueur> iteJoueur = iterator();
@@ -360,34 +409,43 @@ public class Partie implements Iterable<Joueur> {
 		while(gagnant == null && iteJoueur.hasNext())
 		{
 			j = iteJoueur.next();
-			if(j.huitBatiments())
+			if(j.huitBatiments()) //Le premier joueur ayant construit 8 bâtiments est le gagnant.
 			{
 				gagnant = j;
 			}
 		}
 	}
 	
+	/**
+	 * Méthode permettant de savoir si un joueur est le gagnant.
+	 * @param j le joueur à vérifier
+	 * @return true si j est le gagnant
+	 */
 	public boolean isGagnant(Joueur j) {
 		return (gagnant == j);
 	}
 	
+	/**
+	 * Méthode permettant de faire le classement des joueurs selon leur score.
+	 * @return la liste des joueurs triée par leurs scores.
+	 */
 	public ArrayList<Joueur> getClassement() {
-		ArrayList<Joueur> classement = new ArrayList<Joueur>();
-		ArrayList<Joueur> tmpListeJoueur = new ArrayList<Joueur>(listeJoueur);
+		ArrayList<Joueur> classement = new ArrayList<Joueur>(); //Le classement des joueurs, vide au début
+		ArrayList<Joueur> tmpListeJoueur = new ArrayList<Joueur>(listeJoueur); //Liste temporaire listant les joueurs pas encore classés
 		Joueur tmp;
 		do
 		{
-			tmp = tmpListeJoueur.get(0);
-			for(Joueur j : tmpListeJoueur)
+			tmp = tmpListeJoueur.get(0); //On prend le premier joueur comme joueur temporaire
+			for(Joueur j : tmpListeJoueur) //Pour chaque joueur, on vérifie si son score est supérieur au joueur temporaire
 			{
-				if(j.calculerPoints() > tmp.calculerPoints())
+				if(j.calculerPoints() > tmp.calculerPoints()) //Le premier joueur ayant un score supérieur au joueur temporaire prend sa place...
 				{
 					tmp = j;
 				}
 			}
-			classement.add(tmpListeJoueur.remove(tmpListeJoueur.indexOf(tmp)));
+			classement.add(tmpListeJoueur.remove(tmpListeJoueur.indexOf(tmp))); //...et sort de la liste temporaire pour entrer dans le classement.
 		}
-		while(!tmpListeJoueur.isEmpty());
+		while(!tmpListeJoueur.isEmpty()); //On répète jusqu'à ce que la liste temporaire soit vide.
 		return classement;
 	}
 	

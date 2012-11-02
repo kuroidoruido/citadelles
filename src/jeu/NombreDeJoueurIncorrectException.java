@@ -4,7 +4,9 @@
 package jeu;
 
 /**
- * @author anthony
+ * Cette exception survient si le nombre de joueurs correspondant à une partie est incorrect
+ * Ce nombre doit être compris entre 3 et 8.
+ * @author Anthony Pena
  *
  */
 @SuppressWarnings("serial")

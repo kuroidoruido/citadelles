@@ -7,7 +7,8 @@ import carte.Famille;
 import carte.InstantEffet;
 
 /**
- * @author Bauchet ClÃ©ment
+ * Classe modélisant le personnage Abbé.
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 29 oct. 2012
  *
@@ -15,7 +16,7 @@ import carte.InstantEffet;
 public class Abbe extends Personnage {
 
 	public Abbe(Famille f, Partie partie) {
-		super("AbbÃ©", f, "Le joueur le plus riche lui donne 1 piÃ¨ce d'or", 5, partie,InstantEffet.effetPre);
+		super("Abbé", f, "Le joueur le plus riche lui donne 1 pièce d'or", 5, partie,InstantEffet.effetPre);
 	}
 	
 	public void capacite() {

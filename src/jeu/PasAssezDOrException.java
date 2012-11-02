@@ -1,7 +1,9 @@
 package jeu;
 
 /**
- * @author Bauchet ClÃ©ment
+ * Cette exception survient lorsqu'on essaie d'enlever à un joueur plus d'or qu'il n'en possède.
+ * Par exemple, lorsqu'un joueur essaie de construire un quartier trop cher pour lui...
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 25 oct. 2012
  *

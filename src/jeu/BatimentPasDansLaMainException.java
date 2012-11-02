@@ -1,7 +1,8 @@
 package jeu;
 
 /**
- * @author Bauchet ClÃ©ment
+ * Cette exception survient si un joueur essaie de construire un bâtiment qui n'est pas dans sa main.
+ * @author Bauchet Clément
  * @author Pena Anthony
  * @version 25 oct. 2012
  *
@@ -13,7 +14,7 @@ public class BatimentPasDansLaMainException extends Exception {
 	 * 
 	 */
 	public BatimentPasDansLaMainException() {
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -21,7 +22,7 @@ public class BatimentPasDansLaMainException extends Exception {
 	 */
 	public BatimentPasDansLaMainException(String message) {
 		super(message);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -29,7 +30,7 @@ public class BatimentPasDansLaMainException extends Exception {
 	 */
 	public BatimentPasDansLaMainException(Throwable cause) {
 		super(cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 	/**
@@ -38,7 +39,7 @@ public class BatimentPasDansLaMainException extends Exception {
 	 */
 	public BatimentPasDansLaMainException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Stub du constructeur gÃ©nÃ©rÃ© automatiquement
+		// TODO Stub du constructeur généré automatiquement
 	}
 
 }

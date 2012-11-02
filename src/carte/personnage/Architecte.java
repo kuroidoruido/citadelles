@@ -5,7 +5,8 @@ import carte.Famille;
 import carte.InstantEffet;
 
 /**
-* @author Bauchet ClÃ©ment
+ * Classe modélisant le personnage Architecte.
+* @author Bauchet Clément
 * @author Pena Anthony
 * @version 29 oct. 2012
 *
@@ -13,7 +14,7 @@ import carte.InstantEffet;
 public class Architecte extends Personnage {
 
 	public Architecte(Famille f, Partie partie) {
-		super("Architecte", f, "Peut bÃ¢tir jusqu'Ã  3 quartiers", 7, partie,InstantEffet.effetPre);
+		super("Architecte", f, "Peut bâtir jusqu'à 3 quartiers", 7, partie,InstantEffet.effetPre);
 	}
 	
 	public void capacite() {

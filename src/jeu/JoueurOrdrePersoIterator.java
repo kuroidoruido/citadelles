@@ -6,7 +6,8 @@ package jeu;
 import java.util.Iterator;
 
 /**
- * @author anthony
+ * Classe servant à la gestion d'un itérateur pour parcourir la liste des joueurs selon l'ordre de jeu de leurs personnages.
+ * @author Anthony Pena
  *
  */
 public class JoueurOrdrePersoIterator implements Iterator<Joueur> {

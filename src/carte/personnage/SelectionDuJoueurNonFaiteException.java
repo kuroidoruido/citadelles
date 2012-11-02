@@ -4,7 +4,8 @@
 package carte.personnage;
 
 /**
- * @author anthony
+ * Cette exception survient lorsque l'empereur n'a sélectionné personne pour la couronne
+ * @author Anthony Pena
  *
  */
 @SuppressWarnings("serial")

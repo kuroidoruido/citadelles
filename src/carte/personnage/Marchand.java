@@ -5,7 +5,8 @@ import carte.Famille;
 import carte.InstantEffet;
 
 /**
-* @author Bauchet ClÃƒÂ©ment
+ * Classe modélisant le personnage Marchand.
+* @author Bauchet Clément
 * @author Pena Anthony
 * @version 29 oct. 2012
 *
@@ -13,10 +14,10 @@ import carte.InstantEffet;
 public class Marchand extends Personnage {
 
 	public Marchand(Famille f, Partie partie) {
-		super("Marchand", f, "Gagne une piÃ¨ce d'or de plus", 6, partie,InstantEffet.effetPre);
+		super("Marchand", f, "Gagne une pièce d'or de plus", 6, partie,InstantEffet.effetPre);
 	}
-	
+
 	public void capacite() {
-		partie.chercher(this).addOr(1); //Le marchand gagne 1 or de plus
+		partie.chercher(this).addOr(1); //Le marchand gagne 1 pièce d'or de plus
 	}
 }
